@@ -1,0 +1,3056 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-10-27 Thu 17:17 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Machine Learning</title>
+<meta name="author" content="Alberto Valdez" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="https://albertovaldez5.gitlab.io/org-template/resources/theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://albertovaldez5.gitlab.io/org-template/resources/theme/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://albertovaldez5.gitlab.io/org-template/resources/theme/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://albertovaldez5.gitlab.io/org-template/resources/theme/js/readtheorg.js"></script>
+<link rel="shortcut icon" href="https://albertovaldez5.gitlab.io/org-template/resources/theme/favicon.ico">
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">Machine Learning
+<br />
+<span class="subtitle">Data first</span>
+</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#machine-learning">1. Machine Learning</a>
+<ul>
+<li><a href="#supervised-learning">1.1. Supervised Learning</a></li>
+<li><a href="#unsupervised-learning">1.2. Unsupervised Learning</a></li>
+</ul>
+</li>
+<li><a href="#supervised-learning">2. Supervised Learning</a>
+<ul>
+<li><a href="#regression">2.1. Regression</a></li>
+<li><a href="#classification">2.2. Classification</a></li>
+<li><a href="#regression-vs-classification">2.3. Regression vs. Classification</a></li>
+</ul>
+</li>
+<li><a href="#linear-regression-in-python">3. Linear Regression in Python</a>
+<ul>
+<li><a href="#load-the-data">3.1. Load the Data</a></li>
+<li><a href="#plot-the-data">3.2. Plot the Data</a></li>
+<li><a href="#find-a-relationship">3.3. Find a Relationship</a></li>
+<li><a href="#create-a-model-instance">3.4. Create a model instance</a></li>
+<li><a href="#plotting-the-predictions">3.5. Plotting the predictions</a></li>
+</ul>
+</li>
+<li><a href="#logistic-regression">4. Logistic Regression</a>
+<ul>
+<li><a href="#logistic-regression-in-python">4.1. Logistic Regression in Python</a></li>
+<li><a href="#train-and-test-sets">4.2. Train and Test Sets</a></li>
+<li><a href="#logistic-regression-model">4.3. Logistic Regression Model</a></li>
+<li><a href="#predicting-diabetes">4.4. Predicting Diabetes</a></li>
+<li><a href="#how-does-it-work">4.5. How does it work?</a>
+<ul>
+<li><a href="#the-logit-function">4.5.1. The Logit Function</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#accuracy-and-sensitivity">5. Accuracy and Sensitivity</a>
+<ul>
+<li><a href="#confusion-matrix">5.1. Confusion Matrix</a></li>
+<li><a href="#precision">5.2. Precision</a></li>
+<li><a href="#sensitivity">5.3. Sensitivity</a></li>
+<li><a href="#tradeoff">5.4. Tradeoff</a></li>
+<li><a href="#f1-score-harmonic-mean">5.5. F1 Score / Harmonic Mean</a></li>
+<li><a href="#confusion-matrix-in-practice">5.6. Confusion Matrix in Practice</a></li>
+</ul>
+</li>
+<li><a href="#support-vector-machine">6. Support Vector Machine</a>
+<ul>
+<li><a href="#svms-in-practice">6.1. SVMs in practice</a></li>
+<li><a href="#comparing-svm-to-logistic-regression">6.2. Comparing SVM to Logistic Regression</a></li>
+</ul>
+</li>
+<li><a href="#data-pre-processing">7. Data Pre-processing</a>
+<ul>
+<li><a href="#encoding-labels">7.1. Encoding Labels</a></li>
+<li><a href="#scale-and-normalize-data">7.2. Scale and Normalize Data</a></li>
+</ul>
+</li>
+<li><a href="#decision-trees">8. Decision Trees</a>
+<ul>
+<li><a href="#scaling-the-data">8.1. Scaling the Data</a></li>
+<li><a href="#use-the-decision-tree-model">8.2. Use the Decision Tree Model</a></li>
+</ul>
+</li>
+<li><a href="#ensemble-learning">9. Ensemble Learning</a>
+<ul>
+<li><a href="#random-forests">9.1. Random Forests</a></li>
+</ul>
+</li>
+<li><a href="#bootstrap-aggregation">10. Bootstrap aggregation</a>
+<ul>
+<li><a href="#aggregation">10.1. Aggregation</a></li>
+<li><a href="#boosting">10.2. Boosting</a></li>
+<li><a href="#adaptive-boosting">10.3. Adaptive Boosting</a></li>
+<li><a href="#gradient-boosting">10.4. Gradient Boosting</a></li>
+<li><a href="#boosting-in-practice">10.5. Boosting in Practice</a></li>
+</ul>
+</li>
+<li><a href="#oversampling">11. Oversampling</a>
+<ul>
+<li><a href="#random-oversampling">11.1. Random Oversampling</a></li>
+<li><a href="#synthetic-minority-oversampling-technique">11.2. Synthetic Minority Oversampling Technique</a></li>
+</ul>
+</li>
+<li><a href="#undersampling">12. Undersampling</a>
+<ul>
+<li><a href="#random-undersampling">12.1. Random Undersampling</a></li>
+<li><a href="#cluster-centroid-undersampling">12.2. Cluster Centroid Undersampling</a></li>
+<li><a href="#smoteenn">12.3. SMOTEENN</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-machine-learning" class="outline-2">
+<h2 id="machine-learning"><span class="section-number-2">1.</span> Machine Learning</h2>
+<div class="outline-text-2" id="text-machine-learning">
+<p>
+ML is the use of statistical algorithm to perform tasks such as learning from data patterns and making predictions. There are different models (mathematical representations of real-world phenomena). It can be divided into: supervised, unsupervised and deep learning.
+</p>
+</div>
+
+<div id="outline-container-supervised-learning" class="outline-3">
+<h3 id="supervised-learning"><span class="section-number-3">1.1.</span> Supervised Learning</h3>
+<div class="outline-text-3" id="text-supervised-learning">
+<p>
+Deals with labeled data, for example, determining wether a patient has diabetes or not.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Age</th>
+<th scope="col" class="org-right">BMI</th>
+<th scope="col" class="org-left">Has Diabetes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">31</td>
+<td class="org-right">24</td>
+<td class="org-left">No</td>
+</tr>
+
+<tr>
+<td class="org-right">68</td>
+<td class="org-right">39</td>
+<td class="org-left">Yes</td>
+</tr>
+
+<tr>
+<td class="org-right">57</td>
+<td class="org-right">35</td>
+<td class="org-left">?</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Based on data across different categories and measurements, we try to get an answer on the next patient. In this case, based on age and BMI.
+</p>
+</div>
+</div>
+
+<div id="outline-container-unsupervised-learning" class="outline-3">
+<h3 id="unsupervised-learning"><span class="section-number-3">1.2.</span> Unsupervised Learning</h3>
+<div class="outline-text-3" id="text-unsupervised-learning">
+<p>
+Work with datasets without labeled outcomes, so answers or labels as correct answers are not provided. One example can be grouping objects by shape in different clusters.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-supervised-learning" class="outline-2">
+<h2 id="supervised-learning"><span class="section-number-2">2.</span> Supervised Learning</h2>
+<div class="outline-text-2" id="text-supervised-learning">
+<p>
+It can be broadly divided into regression and classification.
+</p>
+</div>
+
+<div id="outline-container-regression" class="outline-3">
+<h3 id="regression"><span class="section-number-3">2.1.</span> Regression</h3>
+<div class="outline-text-3" id="text-regression">
+<p>
+Is used to predict continuous variables. For example, predict a person weight based on other factors like height, diet, exercise.
+</p>
+</div>
+</div>
+
+<div id="outline-container-classification" class="outline-3">
+<h3 id="classification"><span class="section-number-3">2.2.</span> Classification</h3>
+<div class="outline-text-3" id="text-classification">
+<p>
+Is used to predict discrete outcomes. For example, predict if a person will vote on a particular issue depending on their age, sex, income, geographical location, etc. The outcome is either &ldquo;Yes&rdquo; or &ldquo;No&rdquo;, the classification model would attempt to learn patterns from the data and gain accurate prediction from it.
+</p>
+</div>
+</div>
+
+<div id="outline-container-regression-vs-classification" class="outline-3">
+<h3 id="regression-vs-classification"><span class="section-number-3">2.3.</span> Regression vs. Classification</h3>
+<div class="outline-text-3" id="text-regression-vs-classification">
+<p>
+The difference between them is that regression tries to predict a continuous variable while classification tries to predict ordinal data.
+</p>
+
+<p>
+In both, a dataset is divided into features and target. <b>Features</b> are variables used to make a prediction while <b>Target</b> is the predicted outcome.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-linear-regression-in-python" class="outline-2">
+<h2 id="linear-regression-in-python"><span class="section-number-2">3.</span> Linear Regression in Python</h2>
+<div class="outline-text-2" id="text-linear-regression-in-python">
+</div>
+
+<div id="outline-container-load-the-data" class="outline-3">
+<h3 id="load-the-data"><span class="section-number-3">3.1.</span> Load the Data</h3>
+<div class="outline-text-3" id="text-load-the-data">
+<div class="src-name" id="org21536b8">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">import</span> <span style="color: #4EC9B0;">pandas </span><span style="color: #569CD6;">as</span><span style="color: #4EC9B0;"> pd</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> pathlib </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">Path</span>
+<span style="color: #569CD6;">import</span> <span style="color: #4EC9B0;">matplotlib.pyplot </span><span style="color: #569CD6;">as</span><span style="color: #4EC9B0;"> plt</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.linear_model </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">LinearRegression</span>
+
+<span style="color: #9CDCFE;">resources</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">Path</span>(<span style="color: #CE9178;">"../resources"</span>)
+<span style="color: #9CDCFE;">df</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #ded492;">read_csv</span>(resources <span style="color: #e0e0e0;">/</span> <span style="color: #CE9178;">"Salary_Data.csv"</span>)
+<span style="color: #C586C0;">print</span>(df.<span style="color: #ded492;">head</span>())
+</pre>
+</div>
+
+<pre class="example" id="orgc6506a1">
+   YearsExperience   Salary
+0              1.1  39343.0
+1              1.3  46205.0
+2              1.5  37731.0
+3              2.0  43525.0
+4              2.2  39891.0
+</pre>
+</div>
+</div>
+
+<div id="outline-container-plot-the-data" class="outline-3">
+<h3 id="plot-the-data"><span class="section-number-3">3.2.</span> Plot the Data</h3>
+<div class="outline-text-3" id="text-plot-the-data">
+<p>
+Now we can plot the data to get an idea of the distribution.
+</p>
+
+<div class="src-name" id="orga51b50e">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">output</span> <span style="color: #e0e0e0;">=</span> resources <span style="color: #e0e0e0;">/</span> <span style="color: #CE9178;">"salary1.png"</span>
+<span style="color: #9CDCFE;">fig</span>, <span style="color: #9CDCFE;">ax</span> <span style="color: #e0e0e0;">=</span> plt.<span style="color: #ded492;">subplots</span>(<span style="color: #9CDCFE;">figsize</span><span style="color: #e0e0e0;">=</span>(<span style="color: #BBCCAA;">8</span>, <span style="color: #BBCCAA;">5</span>))
+ax.<span style="color: #ded492;">scatter</span>(df.<span style="color: #4EC9B0;">YearsExperience</span>, df.<span style="color: #4EC9B0;">Salary</span>)
+ax.<span style="color: #ded492;">set_xlabel</span>(<span style="color: #CE9178;">'Years of Experience'</span>)
+ax.<span style="color: #ded492;">set_ylabel</span>(<span style="color: #CE9178;">'Salary in USD'</span>)
+fig.<span style="color: #ded492;">savefig</span>(output)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"#+attr_html: :width 500px"</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">f"[[</span><span style="color: #569CD6; background-color: #252525;">{</span><span style="color: #9CDCFE; background-color: #252525;">output</span><span style="color: #569CD6; background-color: #252525;">}</span><span style="color: #CE9178;">]]"</span>)
+</pre>
+</div>
+
+<div class="org" id="org4636e74">
+
+<div id="orgfea83f8" class="figure">
+<p><img src="../resources/salary1.png" alt="salary1.png" width="500px" />
+</p>
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-find-a-relationship" class="outline-3">
+<h3 id="find-a-relationship"><span class="section-number-3">3.3.</span> Find a Relationship</h3>
+<div class="outline-text-3" id="text-find-a-relationship">
+<p>
+Normally, the independent variable is placed on the x-axis, and the dependent variable on the y-axis. The years of experience is independent because we assume that the salary depends on experience.
+</p>
+
+<div class="src-name" id="orgca7e94e">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">X</span> <span style="color: #e0e0e0;">=</span> df.<span style="color: #4EC9B0;">YearsExperience</span>.<span style="color: #9CDCFE;">values</span>.<span style="color: #ded492;">reshape</span>(<span style="color: #e0e0e0;">-</span><span style="color: #BBCCAA;">1</span>, <span style="color: #BBCCAA;">1</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"data:"</span>, <span style="color: #e0e0e0;">X</span>[:<span style="color: #BBCCAA;">5</span>])
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"shape:"</span>, <span style="color: #e0e0e0;">X</span>.<span style="color: #9CDCFE;">shape</span>)
+</pre>
+</div>
+
+<pre class="example" id="org06e1fde">
+data: [[1.1]
+ [1.3]
+ [1.5]
+ [2. ]
+ [2.2]]
+shape: (30, 1)
+</pre>
+
+<p>
+We have to reshape the array in order to fit with <b>Scikit-learn</b> standards. Our X variable remains the Years of Experience and the y variable will be the Salary.
+</p>
+
+<div class="src-name" id="org9db5e59">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">y</span> <span style="color: #e0e0e0;">=</span> df.<span style="color: #4EC9B0;">Salary</span>
+<span style="color: #C586C0;">print</span>(y[:<span style="color: #BBCCAA;">5</span>])
+</pre>
+</div>
+
+<pre class="example" id="orgfe1d6a0">
+0    39343.0
+1    46205.0
+2    37731.0
+3    43525.0
+4    39891.0
+Name: Salary, dtype: float64
+</pre>
+</div>
+</div>
+
+<div id="outline-container-create-a-model-instance" class="outline-3">
+<h3 id="create-a-model-instance"><span class="section-number-3">3.4.</span> Create a model instance</h3>
+<div class="outline-text-3" id="text-create-a-model-instance">
+<p>
+Once the data is ready, we will fit/train the model. Then we can use the predict method to generate predictions. The model has created a line with 30 datapoints in X which we can use for getting a value in y.
+</p>
+
+<div class="src-name" id="orgf40070a">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">model</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">LinearRegression</span>()
+model.<span style="color: #ded492;">fit</span>(<span style="color: #e0e0e0;">X</span>, y)
+<span style="color: #579C4C;"># predict</span>
+<span style="color: #9CDCFE;">y_pred</span> <span style="color: #e0e0e0;">=</span> model.<span style="color: #ded492;">predict</span>(<span style="color: #e0e0e0;">X</span>)
+<span style="color: #C586C0;">print</span>(y_pred.<span style="color: #9CDCFE;">shape</span>)
+</pre>
+</div>
+
+<pre class="example" id="orgf6a588e">
+(30,)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-plotting-the-predictions" class="outline-3">
+<h3 id="plotting-the-predictions"><span class="section-number-3">3.5.</span> Plotting the predictions</h3>
+<div class="outline-text-3" id="text-plotting-the-predictions">
+<p>
+We are going to plot both the available data and the predictions from the model.
+</p>
+
+<div class="src-name" id="org159dc4e">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">output</span> <span style="color: #e0e0e0;">=</span> resources <span style="color: #e0e0e0;">/</span> <span style="color: #CE9178;">"salary2.png"</span>
+<span style="color: #9CDCFE;">fig</span>, <span style="color: #9CDCFE;">ax</span> <span style="color: #e0e0e0;">=</span> plt.<span style="color: #ded492;">subplots</span>(<span style="color: #9CDCFE;">figsize</span><span style="color: #e0e0e0;">=</span>(<span style="color: #BBCCAA;">8</span>, <span style="color: #BBCCAA;">5</span>))
+<span style="color: #579C4C;"># using the model data</span>
+ax.<span style="color: #ded492;">scatter</span>(<span style="color: #e0e0e0;">X</span>, y)
+ax.<span style="color: #ded492;">plot</span>(<span style="color: #e0e0e0;">X</span>, y_pred, <span style="color: #9CDCFE;">color</span><span style="color: #e0e0e0;">=</span><span style="color: #CE9178;">'red'</span>)
+fig.<span style="color: #ded492;">savefig</span>(output)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"#+attr_html: :width 500px"</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">f"[[</span><span style="color: #569CD6; background-color: #252525;">{</span><span style="color: #9CDCFE; background-color: #252525;">output</span><span style="color: #569CD6; background-color: #252525;">}</span><span style="color: #CE9178;">]]"</span>)
+</pre>
+</div>
+
+<div class="org" id="org4967293">
+
+<div id="org0ea09c0" class="figure">
+<p><img src="../resources/salary2.png" alt="salary2.png" width="500px" />
+</p>
+</div>
+
+</div>
+
+<p>
+The linear prediction can extrapolate beyond the current data, however we are currently showing the linear regression against the current data.
+</p>
+
+<p>
+If we wanted to inspect the model, we can always take a look at its properties.
+</p>
+
+<div class="src-name" id="org1299a21">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #C586C0;">print</span>(model.<span style="color: #9CDCFE;">coef_</span>)
+<span style="color: #C586C0;">print</span>(model.<span style="color: #9CDCFE;">intercept_</span>)
+</pre>
+</div>
+
+<pre class="example" id="org9bbc27a">
+[9449.96232146]
+25792.200198668696
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-logistic-regression" class="outline-2">
+<h2 id="logistic-regression"><span class="section-number-2">4.</span> Logistic Regression</h2>
+<div class="outline-text-2" id="text-logistic-regression">
+<p>
+Logistic regression predicts binary outcomes. An example of logistic regression might be to decide wether to approve a credit card application or not. Multiple variables are assessed to arrive at one of two answers: to prove or to deny the application.
+</p>
+
+<p>
+If a given probability is above a certain cutoff point, the sample data is assigned to that class. If the probability is less, it is assigned to another class.
+</p>
+</div>
+
+<div id="outline-container-logistic-regression-in-python" class="outline-3">
+<h3 id="logistic-regression-in-python"><span class="section-number-3">4.1.</span> Logistic Regression in Python</h3>
+<div class="outline-text-3" id="text-logistic-regression-in-python">
+<div class="src-name" id="org99417e6">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">import</span> <span style="color: #4EC9B0;">matplotlib.pyplot </span><span style="color: #569CD6;">as</span><span style="color: #4EC9B0;"> plt</span>
+<span style="color: #569CD6;">import</span> <span style="color: #4EC9B0;">pandas </span><span style="color: #569CD6;">as</span><span style="color: #4EC9B0;"> pd</span>
+
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.datasets </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> make_blobs</span>
+
+<span style="color: #9CDCFE;">X</span>, <span style="color: #9CDCFE;">y</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">make_blobs</span>(<span style="color: #9CDCFE;">centers</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">2</span>, <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">42</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">f"Labels: </span><span style="color: #569CD6; background-color: #252525;">{</span><span style="color: #9CDCFE; background-color: #252525;">y[:</span><span style="color: #BBCCAA; background-color: #252525;">10</span><span style="color: #9CDCFE; background-color: #252525;">]</span><span style="color: #569CD6; background-color: #252525;">}</span><span style="color: #CE9178;">"</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">f"Data: </span><span style="color: #569CD6; background-color: #252525;">{</span><span style="color: #e0e0e0; background-color: #252525;">X</span><span style="color: #9CDCFE; background-color: #252525;">[:</span><span style="color: #BBCCAA; background-color: #252525;">10</span><span style="color: #9CDCFE; background-color: #252525;">]</span><span style="color: #569CD6; background-color: #252525;">}</span><span style="color: #CE9178;">"</span>)
+</pre>
+</div>
+
+<pre class="example" id="orgc2ec89c">
+Labels: [0 1 0 1 1 0 1 1 0 0]
+Data: [[-2.98837186  8.82862715]
+ [ 5.72293008  3.02697174]
+ [-3.05358035  9.12520872]
+ [ 5.461939    3.86996267]
+ [ 4.86733877  3.28031244]
+ [-2.14780202 10.55232269]
+ [ 4.91656964  2.80035293]
+ [ 3.08921541  2.04173266]
+ [-2.90130578  7.55077118]
+ [-3.34841515  8.70507375]]
+</pre>
+
+<p>
+The centers argument specifies the number of clusters in the dataset, in this case we made two clusters. The random_state ensures reproducibility of the dataset, so it&rsquo;s pseudo-random.
+</p>
+
+<p>
+The X variable contains the coordinates of each data point and the y contains information on the class of each data point. So each datapoint belongs to either 0 or 1.
+</p>
+
+<div class="src-name" id="orge2e89b6">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">output</span> <span style="color: #e0e0e0;">=</span> resources<span style="color: #e0e0e0;">/</span><span style="color: #CE9178;">"logistic1.png"</span>
+<span style="color: #9CDCFE;">fig</span>, <span style="color: #9CDCFE;">ax</span> <span style="color: #e0e0e0;">=</span> plt.<span style="color: #ded492;">subplots</span>(<span style="color: #9CDCFE;">figsize</span><span style="color: #e0e0e0;">=</span>(<span style="color: #BBCCAA;">8</span>, <span style="color: #BBCCAA;">5</span>))
+
+ax.<span style="color: #ded492;">scatter</span>(<span style="color: #e0e0e0;">X</span>[:, <span style="color: #BBCCAA;">0</span>], <span style="color: #e0e0e0;">X</span>[:, <span style="color: #BBCCAA;">1</span>], <span style="color: #9CDCFE;">c</span><span style="color: #e0e0e0;">=</span>y)
+
+fig.<span style="color: #ded492;">savefig</span>(output)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"#+attr_html: :width 500px"</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">f"[[</span><span style="color: #569CD6; background-color: #252525;">{</span><span style="color: #9CDCFE; background-color: #252525;">output</span><span style="color: #569CD6; background-color: #252525;">}</span><span style="color: #CE9178;">]]"</span>)
+</pre>
+</div>
+
+<div class="org" id="org3bd4e13">
+
+<div id="org3d06901" class="figure">
+<p><img src="../resources/logistic1.png" alt="logistic1.png" width="500px" />
+</p>
+</div>
+
+</div>
+
+<p>
+The clusters are very noticeable as they will be either purple or yellow and their positions in the plane are very distinct.
+</p>
+</div>
+</div>
+
+<div id="outline-container-train-and-test-sets" class="outline-3">
+<h3 id="train-and-test-sets"><span class="section-number-3">4.2.</span> Train and Test Sets</h3>
+<div class="outline-text-3" id="text-train-and-test-sets">
+<p>
+The model uses the training dataset to learn from it. The uses the testing dataset to assess its performance. If you use the entire dataset to train a model, you won&rsquo;t know how well the model will perform with unseen data.
+</p>
+
+<div class="src-name" id="org7805e77">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.model_selection </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> train_test_split</span>
+<span style="color: #9CDCFE;">X_train</span>, <span style="color: #9CDCFE;">X_test</span>, <span style="color: #9CDCFE;">y_train</span>, <span style="color: #9CDCFE;">y_test</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">train_test_split</span>(
+    <span style="color: #e0e0e0;">X</span>,
+    y,
+    <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>,
+    <span style="color: #9CDCFE;">stratify</span><span style="color: #e0e0e0;">=</span>y
+)
+</pre>
+</div>
+
+<pre class="example" id="org62c0565">
+
+</pre>
+
+<p>
+The <code>train_test_split</code><sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> module takes X and y arguments and splits each into training and tests sets. A different random state number would distribute the rows of data differently. The <code>random_state</code> argument should not be used for training real models.
+</p>
+
+<p>
+The <code>stratify</code> argument divides a dataset proportionally, for example if 60% of the dataset belongs to class A and the rest to class B, stratify ensures that the entire dataset is split into training tests with the same distribution. We should always consider against stratify if the classes are severely unbalanced or when the dataset is small.
+</p>
+</div>
+</div>
+
+<div id="outline-container-logistic-regression-model" class="outline-3">
+<h3 id="logistic-regression-model"><span class="section-number-3">4.3.</span> Logistic Regression Model</h3>
+<div class="outline-text-3" id="text-logistic-regression-model">
+<div class="src-name" id="org2965e63">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.linear_model </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">LogisticRegression</span>
+
+<span style="color: #9CDCFE;">classifier</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">LogisticRegression</span>(
+    <span style="color: #9CDCFE;">solver</span><span style="color: #e0e0e0;">=</span><span style="color: #CE9178;">'lbfgs'</span>,
+    <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>
+)
+<span style="color: #C586C0;">print</span>(classifier)
+</pre>
+</div>
+
+<pre class="example" id="orgf83b7b7">
+LogisticRegression(random_state=1)
+</pre>
+
+<p>
+Training the model.
+</p>
+
+<div class="src-name" id="org14bea62">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python">classifier.<span style="color: #ded492;">fit</span>(<span style="color: #4EC9B0;">X_train</span>, y_train)
+</pre>
+</div>
+
+<p>
+Validate the model. We will create predictions based on the X_test, then we create a dataframe of the predicted values and actual values.
+</p>
+
+<p>
+Then we can validate the model, we evaluate its performance.
+</p>
+
+<div class="src-name" id="org91916ec">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> accuracy_score</span>
+
+<span style="color: #9CDCFE;">predictions</span> <span style="color: #e0e0e0;">=</span> classifier.<span style="color: #ded492;">predict</span>(<span style="color: #4EC9B0;">X_test</span>)
+<span style="color: #4EC9B0;">pd</span>.<span style="color: #4EC9B0;">DataFrame</span>({<span style="color: #CE9178;">"Prediction"</span>: predictions, <span style="color: #CE9178;">"Actual"</span>: y_test})
+
+<span style="color: #9CDCFE;">score</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">accuracy_score</span>(y_test, predictions)
+<span style="color: #C586C0;">print</span>(score)
+</pre>
+</div>
+
+<pre class="example" id="orga5f5388">
+1.0
+</pre>
+
+<p>
+If the score is 1.0, it means that every single observation in the testing set was predicted correctly by the model. All samples belonging to class 1 were correctly predicted and all samples belonging to class 0 were also correctly predicted.
+</p>
+
+<p>
+However, an extremely high metric should raise suspicion of overfitting, which is when an instance in which the patterns picked up by a model are too specific to a specific dataset.
+</p>
+
+<p>
+We are going to create a new data point and evaluate it.
+</p>
+
+<div class="src-name" id="orgf7d5ba8">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">import</span> <span style="color: #4EC9B0;">numpy </span><span style="color: #569CD6;">as</span><span style="color: #4EC9B0;"> np</span>
+
+<span style="color: #9CDCFE;">new_data</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">np</span>.<span style="color: #ded492;">array</span>([[<span style="color: #e0e0e0;">-</span><span style="color: #BBCCAA;">2</span>, <span style="color: #BBCCAA;">6</span>]])
+
+<span style="color: #9CDCFE;">output</span> <span style="color: #e0e0e0;">=</span> resources <span style="color: #e0e0e0;">/</span> <span style="color: #CE9178;">"logistic2.png"</span>
+
+<span style="color: #9CDCFE;">fig</span>, <span style="color: #9CDCFE;">ax</span> <span style="color: #e0e0e0;">=</span> plt.<span style="color: #ded492;">subplots</span>(<span style="color: #9CDCFE;">figsize</span><span style="color: #e0e0e0;">=</span>(<span style="color: #BBCCAA;">8</span>, <span style="color: #BBCCAA;">5</span>))
+ax.<span style="color: #ded492;">scatter</span>(<span style="color: #e0e0e0;">X</span>[:, <span style="color: #BBCCAA;">0</span>], <span style="color: #e0e0e0;">X</span>[:, <span style="color: #BBCCAA;">1</span>], <span style="color: #9CDCFE;">c</span><span style="color: #e0e0e0;">=</span>y)
+ax.<span style="color: #ded492;">scatter</span>(new_data[<span style="color: #BBCCAA;">0</span>, <span style="color: #BBCCAA;">0</span>], new_data[<span style="color: #BBCCAA;">0</span>, <span style="color: #BBCCAA;">1</span>], <span style="color: #9CDCFE;">c</span><span style="color: #e0e0e0;">=</span><span style="color: #CE9178;">"r"</span>, <span style="color: #9CDCFE;">marker</span><span style="color: #e0e0e0;">=</span><span style="color: #CE9178;">"o"</span>, <span style="color: #9CDCFE;">s</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">100</span>)
+fig.<span style="color: #ded492;">savefig</span>(output)
+
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"#+attr_html: :width 500px"</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">f"[[</span><span style="color: #569CD6; background-color: #252525;">{</span><span style="color: #9CDCFE; background-color: #252525;">output</span><span style="color: #569CD6; background-color: #252525;">}</span><span style="color: #CE9178;">]]"</span>)
+</pre>
+</div>
+
+<div class="org" id="orgacfc312">
+
+<div id="org2bd38a8" class="figure">
+<p><img src="../resources/logistic2.png" alt="logistic2.png" width="500px" />
+</p>
+</div>
+
+</div>
+
+<p>
+Here we make the prediction, our result will tell us to which class the new datapoint belongs to.
+</p>
+
+<div class="src-name" id="org3e663cc">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">predictions</span> <span style="color: #e0e0e0;">=</span> classifier.<span style="color: #ded492;">predict</span>(new_data)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">f"The new point was classified as: </span><span style="color: #569CD6; background-color: #252525;">{</span><span style="color: #9CDCFE; background-color: #252525;">predictions</span><span style="color: #569CD6; background-color: #252525;">}</span><span style="color: #CE9178;">"</span>)
+</pre>
+</div>
+
+<pre class="example" id="org0072ab5">
+The new point was classified as: [0]
+</pre>
+</div>
+</div>
+
+<div id="outline-container-predicting-diabetes" class="outline-3">
+<h3 id="predicting-diabetes"><span class="section-number-3">4.4.</span> Predicting Diabetes</h3>
+<div class="outline-text-3" id="text-predicting-diabetes">
+<p>
+We can use logistic regression to predict diabetes.
+</p>
+
+<div class="src-name" id="org2ff0ab0">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> pathlib </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">Path</span>
+<span style="color: #569CD6;">import</span> <span style="color: #4EC9B0;">pandas </span><span style="color: #569CD6;">as</span><span style="color: #4EC9B0;"> pd</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> accuracy_score</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.linear_model </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">LogisticRegression</span>
+
+
+<span style="color: #9CDCFE;">data</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">Path</span>(<span style="color: #CE9178;">'../resources/diabetes.csv'</span>)
+<span style="color: #9CDCFE;">df</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #ded492;">read_csv</span>(data)
+<span style="color: #C586C0;">print</span>(df.<span style="color: #ded492;">head</span>())
+</pre>
+</div>
+
+<pre class="example" id="orgb3eac80">
+   Pregnancies  Glucose  ...  Age  Outcome
+0            6      148  ...   50        1
+1            1       85  ...   31        0
+2            8      183  ...   32        1
+3            1       89  ...   21        0
+4            0      137  ...   33        1
+
+[5 rows x 9 columns]
+</pre>
+
+<p>
+Let&rsquo;s separate the outcome column from the rest. So the &ldquo;Outcome&rdquo; column is defined as the target (y) and the rest are X (features).
+</p>
+
+<div class="src-name" id="org0409871">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">y</span> <span style="color: #e0e0e0;">=</span> df[<span style="color: #CE9178;">"Outcome"</span>]
+<span style="color: #9CDCFE;">X</span> <span style="color: #e0e0e0;">=</span> df.<span style="color: #ded492;">drop</span>(<span style="color: #9CDCFE;">columns</span><span style="color: #e0e0e0;">=</span><span style="color: #CE9178;">"Outcome"</span>)
+</pre>
+</div>
+
+<pre class="example" id="org8d7f2b3">
+
+</pre>
+
+<p>
+Now we can repeat the logistic regression steps with this dataset.
+</p>
+
+<div class="src-name" id="orgd4981de">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.model_selection </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> train_test_split</span>
+<span style="color: #9CDCFE;">X_train</span>, <span style="color: #9CDCFE;">X_test</span>, <span style="color: #9CDCFE;">y_train</span>, <span style="color: #9CDCFE;">y_test</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">train_test_split</span>(
+    <span style="color: #e0e0e0;">X</span>,
+    y,
+    <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>,
+    <span style="color: #9CDCFE;">stratify</span><span style="color: #e0e0e0;">=</span>y
+)
+<span style="color: #C586C0;">print</span>(<span style="color: #4EC9B0;">X_train</span>.<span style="color: #9CDCFE;">size</span>, <span style="color: #4EC9B0;">X_test</span>.<span style="color: #9CDCFE;">size</span>)
+</pre>
+</div>
+
+<p>
+Then we initialize a model.
+</p>
+
+<div class="src-name" id="orgf4e6d2c">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">classifier</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">LogisticRegression</span>(
+    <span style="color: #9CDCFE;">solver</span><span style="color: #e0e0e0;">=</span><span style="color: #CE9178;">'lbfgs'</span>,
+    <span style="color: #9CDCFE;">max_iter</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">200</span>, <span style="color: #579C4C;"># upper limit of num of iter solver</span>
+    <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>
+)
+<span style="color: #C586C0;">print</span>(classifier)
+</pre>
+</div>
+
+<pre class="example" id="orgcde1d15">
+LogisticRegression(max_iter=200, random_state=1)
+</pre>
+
+<p>
+Now we train the model.
+</p>
+
+<div class="src-name" id="orgd7cdce0">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python">classifier.<span style="color: #ded492;">fit</span>(<span style="color: #4EC9B0;">X_train</span>, y_train)
+<span style="color: #C586C0;">print</span>(<span style="color: #C586C0;">vars</span>(classifier))
+</pre>
+</div>
+
+<p>
+Then we create predictions.
+</p>
+
+<div class="src-name" id="org7a27f01">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">y_pred</span> <span style="color: #e0e0e0;">=</span> classifier.<span style="color: #ded492;">predict</span>(<span style="color: #4EC9B0;">X_test</span>)
+<span style="color: #9CDCFE;">results</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #4EC9B0;">DataFrame</span>({<span style="color: #CE9178;">"Prediction"</span>: y_pred, <span style="color: #CE9178;">"Actual"</span>: y_test}).<span style="color: #ded492;">reset_index</span>(<span style="color: #9CDCFE;">drop</span><span style="color: #e0e0e0;">=</span><span style="color: #569CD6;">True</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #4EC9B0;">results</span>.<span style="color: #ded492;">head</span>())
+</pre>
+</div>
+
+<pre class="example" id="org6c3b3f1">
+   Prediction  Actual
+0           0       0
+1           1       1
+2           0       0
+3           1       1
+4           0       0
+</pre>
+
+<p>
+And finally we evaluate performance.
+</p>
+
+<div class="src-name" id="orgf2f0185">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #C586C0;">print</span>(<span style="color: #ded492;">accuracy_score</span>(y_test, y_pred))
+</pre>
+</div>
+
+<pre class="example" id="orgdbb1db6">
+0.7760416666666666
+</pre>
+</div>
+</div>
+
+<div id="outline-container-how-does-it-work" class="outline-3">
+<h3 id="how-does-it-work"><span class="section-number-3">4.5.</span> How does it work?</h3>
+<div class="outline-text-3" id="text-how-does-it-work">
+<p>
+Linear regression would not work for when we want a binary value, because the binary outcome in a graph would be either at 1.0 or 0.0, no in-between.
+</p>
+
+<p>
+The probability outcome is not given by linear regression but rather by:
+</p>
+
+<blockquote>
+<p>
+log(probability of admission/(1 - probability of admission))
+</p>
+</blockquote>
+
+<p>
+This results in an S-shaped curve that represents the probability of being admitted at a given test score.
+</p>
+
+<p>
+This S-shaped curve, also called a sigmoid curve, can then be used to predict acceptance for new applicants.<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>
+</p>
+</div>
+
+<div id="outline-container-the-logit-function" class="outline-4">
+<h4 id="the-logit-function"><span class="section-number-4">4.5.1.</span> The Logit Function</h4>
+<div class="outline-text-4" id="text-the-logit-function">
+<p>
+Logarithms are useful at stretching a distribution&rsquo;s ratio. In this case, as the value on the x-axis increases, its y-axis value increases rapidly. The illustration on the right shows that the curve is been straightened into a line after plotting the logarithms of the values, since logarithms undo exponents.
+</p>
+
+<p>
+The logit function<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup> best describes this phenomena.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-accuracy-and-sensitivity" class="outline-2">
+<h2 id="accuracy-and-sensitivity"><span class="section-number-2">5.</span> Accuracy and Sensitivity</h2>
+<div class="outline-text-2" id="text-accuracy-and-sensitivity">
+</div>
+
+<div id="outline-container-confusion-matrix" class="outline-3">
+<h3 id="confusion-matrix"><span class="section-number-3">5.1.</span> Confusion Matrix</h3>
+<div class="outline-text-3" id="text-confusion-matrix">
+<p>
+Whenever a model fails to make a prediction, it will fall in one of the following categories.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">Predicted True</th>
+<th scope="col" class="org-left">Predicted False</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Actually True</td>
+<td class="org-left">TRUE POSITIVE</td>
+<td class="org-left">FALSE NEGATIVE</td>
+</tr>
+
+<tr>
+<td class="org-left">Actually False</td>
+<td class="org-left">FALSE POSITIVE</td>
+<td class="org-left">TRUE NEGATIVE</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Depending on what the model is trying to precit, different outcomes may be damaging. When predicting a fraudulent transaction, a FALSE NEGATIVE won&rsquo;t be able to detect an actual fraud while a FALSE POSITIVE will consider a non-fraudulent transaction as fraudulent, which is not as severe as the former.
+</p>
+</div>
+</div>
+
+<div id="outline-container-precision" class="outline-3">
+<h3 id="precision"><span class="section-number-3">5.2.</span> Precision</h3>
+<div class="outline-text-3" id="text-precision">
+<p>
+A confusion matrix shows the probability of a prediction of falling into one of the possible bins.
+</p>
+
+<p>
+Precision is the measure of how likely is that the prediction is actually true. It is measured by dividing the True Positives by All Positives.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-right">Predicted True</th>
+<th scope="col" class="org-right">Predicted False</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Actually True</td>
+<td class="org-right">30</td>
+<td class="org-right">10</td>
+</tr>
+
+<tr>
+<td class="org-left">Actually False</td>
+<td class="org-right">20</td>
+<td class="org-right">40</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Precision = TP/(TP + FP)
+</p>
+
+<p>
+In this case = 30 / (30 + 20) = 0.6
+</p>
+</div>
+</div>
+
+<div id="outline-container-sensitivity" class="outline-3">
+<h3 id="sensitivity"><span class="section-number-3">5.3.</span> Sensitivity</h3>
+<div class="outline-text-3" id="text-sensitivity">
+<p>
+Sensitivity or recall is how likely is the test to create a correct prediction, being either True or False. It is measured by dividing True Positives by True Positives plus False Negatives.
+</p>
+
+<p>
+Sensitivity = TP/(TP + FN)
+</p>
+
+<p>
+In this case = 30 / (30 + 10) = 0.75
+</p>
+
+<p>
+A test with high sensitivity means few false negatives even with a high number of false positives. We mostly care to not have false negatives.
+</p>
+</div>
+</div>
+
+<div id="outline-container-tradeoff" class="outline-3">
+<h3 id="tradeoff"><span class="section-number-3">5.4.</span> Tradeoff</h3>
+<div class="outline-text-3" id="text-tradeoff">
+<p>
+Depending on what the test is for, sensitivity may be more important that precision.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-f1-score-harmonic-mean" class="outline-3">
+<h3 id="f1-score-harmonic-mean"><span class="section-number-3">5.5.</span> F1 Score / Harmonic Mean</h3>
+<div class="outline-text-3" id="text-f1-score-harmonic-mean">
+<p>
+The harmonic mean / F1 Score is a single summary statistic of precision and sensitivity.
+</p>
+
+<p>
+F1 Score = 2 * (Precision * Sensitivity) / (Precision + Sensitivity)
+</p>
+
+<p>
+A useful way to think about the F1 score is that a pronounced imbalance between sensitivity and precision will yield a low F1 score.
+</p>
+</div>
+</div>
+
+<div id="outline-container-confusion-matrix-in-practice" class="outline-3">
+<h3 id="confusion-matrix-in-practice"><span class="section-number-3">5.6.</span> Confusion Matrix in Practice</h3>
+<div class="outline-text-3" id="text-confusion-matrix-in-practice">
+<div class="src-name" id="org154b7c6">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> confusion_matrix, classification_report</span>
+
+
+<span style="color: #9CDCFE;">matrix</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">confusion_matrix</span>(y_test, y_pred)
+<span style="color: #C586C0;">print</span>(matrix)
+<span style="color: #9CDCFE;">true_pos</span> <span style="color: #e0e0e0;">=</span> matrix[<span style="color: #BBCCAA;">0</span>][<span style="color: #BBCCAA;">0</span>]
+<span style="color: #9CDCFE;">false_pos</span> <span style="color: #e0e0e0;">=</span> matrix[<span style="color: #BBCCAA;">0</span>][<span style="color: #BBCCAA;">1</span>]
+<span style="color: #9CDCFE;">false_neg</span> <span style="color: #e0e0e0;">=</span> matrix[<span style="color: #BBCCAA;">1</span>][<span style="color: #BBCCAA;">0</span>]
+<span style="color: #9CDCFE;">true_neg</span> <span style="color: #e0e0e0;">=</span> matrix[<span style="color: #BBCCAA;">1</span>][<span style="color: #BBCCAA;">1</span>]
+
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"sensitivity:"</span>, true_pos <span style="color: #e0e0e0;">/</span> (true_pos <span style="color: #e0e0e0;">+</span> false_pos))
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"accuracy:"</span>, true_pos <span style="color: #e0e0e0;">/</span> (true_pos <span style="color: #e0e0e0;">+</span> false_neg))
+</pre>
+</div>
+
+<pre class="example" id="org6cf0db3">
+[[113  12]
+ [ 31  36]]
+sensitivity: 0.904
+accuracy: 0.7847222222222222
+</pre>
+
+<p>
+Print a report.
+</p>
+
+<p>
+The precision for prediction of the nondiabetics and diabetics are in line with each other. However, the recall (sensitivity) for predicting diabetes is much lower than it is for predicting an absence of diabetes. The lower recall for diabetics is reflected in the dropped F1 score as well
+</p>
+
+<div class="src-name" id="org64d6318">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">report</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">classification_report</span>(y_test, y_pred)
+<span style="color: #C586C0;">print</span>(report)
+</pre>
+</div>
+
+<pre class="example" id="orgf4d0a5e">
+              precision    recall  f1-score   support
+
+           0       0.78      0.90      0.84       125
+           1       0.75      0.54      0.63        67
+
+    accuracy                           0.78       192
+   macro avg       0.77      0.72      0.73       192
+weighted avg       0.77      0.78      0.77       192
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-support-vector-machine" class="outline-2">
+<h2 id="support-vector-machine"><span class="section-number-2">6.</span> Support Vector Machine</h2>
+<div class="outline-text-2" id="text-support-vector-machine">
+<p>
+Support Vector Machines (SVMs) are binary classifiers. It is similar to logistic regression, however, the goal of SVM is to find a line that separates the data into two classes. SVM draws a line at the edge of each class, and attempts to maximize the distance between them. It does so by separating the data points with the largest possible margins.
+</p>
+
+<p>
+The hyperplanes need the widest equidistant margins possible. This improves classification predictions. The width of the margin is considered the margin of separation.
+</p>
+
+<p>
+Support vectors are the data points closest to the hyperplane. They serve as decision boundaries for classification.
+</p>
+
+<p>
+However, when there is an outlier, we can use soft margins to accomodate them, as they allow SVMs to make allowances.
+</p>
+
+<p>
+In a 3D plane, the hyperplane would need to consider the another dimension to separate the both classes.
+</p>
+</div>
+
+<div id="outline-container-svms-in-practice" class="outline-3">
+<h3 id="svms-in-practice"><span class="section-number-3">6.1.</span> SVMs in practice</h3>
+<div class="outline-text-3" id="text-svms-in-practice">
+<p>
+We are going to start with a model that has already been scaled.
+</p>
+
+<div class="src-name" id="orgbd86020">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">data</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">Path</span>(<span style="color: #CE9178;">'../resources/loans.csv'</span>)
+<span style="color: #9CDCFE;">df</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #ded492;">read_csv</span>(data)
+<span style="color: #C586C0;">print</span>(df.<span style="color: #ded492;">head</span>())
+</pre>
+</div>
+
+<pre class="example" id="org7bd54a5">
+     assets  liabilities  ...  mortgage   status
+0  0.210859     0.452865  ...  0.302682     deny
+1  0.395018     0.661153  ...  0.502831  approve
+2  0.291186     0.593432  ...  0.315574  approve
+3  0.458640     0.576156  ...  0.394891  approve
+4  0.463470     0.292414  ...  0.566605  approve
+
+[5 rows x 6 columns]
+</pre>
+
+<p>
+Then we select the data and split it for training.
+</p>
+
+<div class="src-name" id="org6ff33d0">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">y</span> <span style="color: #e0e0e0;">=</span> df[<span style="color: #CE9178;">"status"</span>]
+<span style="color: #9CDCFE;">X</span> <span style="color: #e0e0e0;">=</span> df.<span style="color: #ded492;">drop</span>(<span style="color: #9CDCFE;">columns</span><span style="color: #e0e0e0;">=</span><span style="color: #CE9178;">"status"</span>)
+
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.model_selection </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> train_test_split</span>
+
+<span style="color: #9CDCFE;">X_train</span>, <span style="color: #9CDCFE;">X_test</span>, <span style="color: #9CDCFE;">y_train</span>, <span style="color: #9CDCFE;">y_test</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">train_test_split</span>(<span style="color: #e0e0e0;">X</span>, y, <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>, <span style="color: #9CDCFE;">stratify</span><span style="color: #e0e0e0;">=</span>y)
+<span style="color: #C586C0;">print</span>(<span style="color: #4EC9B0;">X_test</span>.<span style="color: #9CDCFE;">shape</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #4EC9B0;">X_train</span>.<span style="color: #9CDCFE;">shape</span>)
+</pre>
+</div>
+
+<pre class="example" id="org53ecc6d">
+(25, 5)
+(75, 5)
+</pre>
+
+<p>
+Then we import the model from sklearn and we train it with fit.
+</p>
+
+<div class="src-name" id="org994e012">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.svm </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #e0e0e0;">SVC</span>
+<span style="color: #9CDCFE;">model</span> <span style="color: #e0e0e0;">=</span> <span style="color: #e0e0e0;">SVC</span>(<span style="color: #9CDCFE;">kernel</span><span style="color: #e0e0e0;">=</span><span style="color: #CE9178;">'linear'</span>)
+
+model.<span style="color: #ded492;">fit</span>(<span style="color: #4EC9B0;">X_train</span>, y_train)
+</pre>
+</div>
+
+<pre class="example" id="orgdc44b4d">
+
+</pre>
+
+<p>
+Finally we create the predictions.
+</p>
+
+<div class="src-name" id="org3a2f453">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">y_pred</span> <span style="color: #e0e0e0;">=</span> model.<span style="color: #ded492;">predict</span>(<span style="color: #4EC9B0;">X_test</span>)
+<span style="color: #9CDCFE;">results</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #4EC9B0;">DataFrame</span>({
+    <span style="color: #CE9178;">"Prediction"</span>: y_pred,
+    <span style="color: #CE9178;">"Actual"</span>: y_test
+}).<span style="color: #ded492;">reset_index</span>(<span style="color: #9CDCFE;">drop</span><span style="color: #e0e0e0;">=</span><span style="color: #569CD6;">True</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #4EC9B0;">results</span>.<span style="color: #ded492;">head</span>())
+</pre>
+</div>
+
+<pre class="example" id="org4b91d12">
+  Prediction   Actual
+0    approve     deny
+1       deny  approve
+2       deny     deny
+3    approve     deny
+4       deny     deny
+</pre>
+
+<p>
+Then we get the accuracy score and generate a prediction matrix.
+</p>
+
+<div class="src-name" id="org1ba0cf1">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> accuracy_score</span>
+
+<span style="color: #ded492;">accuracy_score</span>(y_test, y_pred)
+
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> confusion_matrix</span>
+<span style="color: #ded492;">confusion_matrix</span>(y_test, y_pred)
+
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> classification_report</span>
+<span style="color: #C586C0;">print</span>(<span style="color: #ded492;">classification_report</span>(y_test, y_pred))
+</pre>
+</div>
+
+<pre class="example" id="orgdf0bdca">
+              precision    recall  f1-score   support
+
+     approve       0.58      0.58      0.58        12
+        deny       0.62      0.62      0.62        13
+
+    accuracy                           0.60        25
+   macro avg       0.60      0.60      0.60        25
+weighted avg       0.60      0.60      0.60        25
+</pre>
+
+<p>
+The workflow of a SVM is very similar to a logistic regression:
+</p>
+
+<ol class="org-ol">
+<li>Select the data (independent and dependent).</li>
+<li>Split the data for training.</li>
+<li>Create and train the model.</li>
+<li>Create predictions.</li>
+<li>Validate the model.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-comparing-svm-to-logistic-regression" class="outline-3">
+<h3 id="comparing-svm-to-logistic-regression"><span class="section-number-3">6.2.</span> Comparing SVM to Logistic Regression</h3>
+<div class="outline-text-3" id="text-comparing-svm-to-logistic-regression">
+<div class="src-name" id="orgd92bd12">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.linear_model </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">LogisticRegression</span>
+
+<span style="color: #9CDCFE;">classifier</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">LogisticRegression</span>(
+    <span style="color: #9CDCFE;">solver</span><span style="color: #e0e0e0;">=</span><span style="color: #CE9178;">'lbfgs'</span>,
+    <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>
+)
+classifier.<span style="color: #ded492;">fit</span>(<span style="color: #4EC9B0;">X_train</span>, y_train)
+
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> accuracy_score</span>
+
+<span style="color: #9CDCFE;">y_pred</span> <span style="color: #e0e0e0;">=</span> classifier.<span style="color: #ded492;">predict</span>(<span style="color: #4EC9B0;">X_test</span>)
+<span style="color: #9CDCFE;">report</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">classification_report</span>(y_test, y_pred)
+<span style="color: #C586C0;">print</span>(report)
+</pre>
+</div>
+
+<pre class="example" id="orge42a8a6">
+              precision    recall  f1-score   support
+
+     approve       0.50      0.25      0.33        12
+        deny       0.53      0.77      0.62        13
+
+    accuracy                           0.52        25
+   macro avg       0.51      0.51      0.48        25
+weighted avg       0.51      0.52      0.48        25
+</pre>
+
+<p>
+SVM wins.
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-data-pre-processing" class="outline-2">
+<h2 id="data-pre-processing"><span class="section-number-2">7.</span> Data Pre-processing</h2>
+<div class="outline-text-2" id="text-data-pre-processing">
+</div>
+
+<div id="outline-container-encoding-labels" class="outline-3">
+<h3 id="encoding-labels"><span class="section-number-3">7.1.</span> Encoding Labels</h3>
+<div class="outline-text-3" id="text-encoding-labels">
+<p>
+Categorical and text data must be converted to numerical data for use in machine learning. From the following dataset we want to use the &ldquo;Bad&rdquo; column.
+</p>
+
+<div class="src-name" id="org3762100">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">import</span> <span style="color: #4EC9B0;">pandas </span><span style="color: #569CD6;">as</span><span style="color: #4EC9B0;"> pd</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> pathlib </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">Path</span>
+
+<span style="color: #9CDCFE;">filepath</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">Path</span>(<span style="color: #CE9178;">"../resources/loans_data.csv"</span>)
+<span style="color: #9CDCFE;">loans_df</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #ded492;">read_csv</span>(filepath)
+<span style="color: #C586C0;">print</span>(loans_df.<span style="color: #ded492;">head</span>())
+</pre>
+</div>
+
+<pre class="example" id="org01bd0e3">
+   amount  term  ...  gender  bad
+0    1000    30  ...    male    0
+1    1000    30  ...  female    0
+2    1000    30  ...  female    0
+3    1000    15  ...    male    0
+4    1000    30  ...  female    0
+
+[5 rows x 7 columns]
+</pre>
+
+<p>
+We will encode the data from text to numbers using panda&rsquo;s <code>get_dummies</code> function.<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup>
+</p>
+
+<div class="src-name" id="orgf6ddee4">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">loans_binary_encoded</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #ded492;">get_dummies</span>(loans_df, <span style="color: #9CDCFE;">columns</span><span style="color: #e0e0e0;">=</span>[<span style="color: #CE9178;">"gender"</span>])
+<span style="color: #9CDCFE;">loans_binary_encoded</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #ded492;">get_dummies</span>(loans_df, <span style="color: #9CDCFE;">columns</span><span style="color: #e0e0e0;">=</span>[<span style="color: #CE9178;">"education"</span>, <span style="color: #CE9178;">"gender"</span>])
+<span style="color: #C586C0;">print</span>(loans_binary_encoded.<span style="color: #ded492;">head</span>())
+</pre>
+</div>
+
+<pre class="example" id="org48aff9e">
+   amount  term  ... gender_female  gender_male
+0    1000    30  ...             0            1
+1    1000    30  ...             1            0
+2    1000    30  ...             1            0
+3    1000    15  ...             0            1
+4    1000    30  ...             1            0
+
+[5 rows x 11 columns]
+</pre>
+
+<p>
+We can also use scikit-learn for encoding.
+</p>
+
+<div class="src-name" id="org46d36f6">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.preprocessing </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">LabelEncoder</span>
+
+<span style="color: #9CDCFE;">le</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">LabelEncoder</span>()
+<span style="color: #9CDCFE;">df2</span> <span style="color: #e0e0e0;">=</span> loans_df.<span style="color: #ded492;">copy</span>()
+df2[<span style="color: #9CDCFE;">'education'</span>] <span style="color: #e0e0e0;">=</span> le.<span style="color: #ded492;">fit_transform</span>(df2[<span style="color: #CE9178;">'education'</span>])
+df2[<span style="color: #9CDCFE;">'gender'</span>] <span style="color: #e0e0e0;">=</span> le.<span style="color: #ded492;">fit_transform</span>(df2[<span style="color: #CE9178;">'gender'</span>])
+<span style="color: #C586C0;">print</span>(df2.<span style="color: #ded492;">head</span>())
+</pre>
+</div>
+
+<pre class="example" id="org79b9709">
+   amount  term      month  age  education  gender  bad
+0    1000    30       June   45          1       1    0
+1    1000    30       July   50          0       0    0
+2    1000    30     August   33          0       0    0
+3    1000    15  September   27          3       1    0
+4    1000    30    October   28          3       0    0
+</pre>
+
+<p>
+We can also create a custom encoding. In this case we use a dictionary as a lookup table and apply it to the entire month column via lambda.
+</p>
+
+<div class="src-name" id="orgd5f2f0c">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">months_num</span> <span style="color: #e0e0e0;">=</span> {
+   <span style="color: #CE9178;">"January"</span>: <span style="color: #BBCCAA;">1</span>,
+   <span style="color: #CE9178;">"February"</span>: <span style="color: #BBCCAA;">2</span>,
+   <span style="color: #CE9178;">"March"</span>: <span style="color: #BBCCAA;">3</span>,
+   <span style="color: #CE9178;">"April"</span>: <span style="color: #BBCCAA;">4</span>,
+   <span style="color: #CE9178;">"May"</span>: <span style="color: #BBCCAA;">5</span>,
+   <span style="color: #CE9178;">"June"</span>: <span style="color: #BBCCAA;">6</span>,
+   <span style="color: #CE9178;">"July"</span>: <span style="color: #BBCCAA;">7</span>,
+   <span style="color: #CE9178;">"August"</span>: <span style="color: #BBCCAA;">8</span>,
+   <span style="color: #CE9178;">"September"</span>: <span style="color: #BBCCAA;">9</span>,
+   <span style="color: #CE9178;">"October"</span>: <span style="color: #BBCCAA;">10</span>,
+   <span style="color: #CE9178;">"November"</span>: <span style="color: #BBCCAA;">11</span>,
+   <span style="color: #CE9178;">"December"</span>: <span style="color: #BBCCAA;">12</span>,
+}
+loans_df[<span style="color: #9CDCFE;">'month'</span>] <span style="color: #e0e0e0;">=</span> loans_df[<span style="color: #CE9178;">'month'</span>].<span style="color: #ded492;">apply</span>(<span style="color: #569CD6;">lambda</span> <span style="color: #9CDCFE;">x</span>: months_num[x])
+<span style="color: #C586C0;">print</span>(loans_df.<span style="color: #ded492;">head</span>())
+</pre>
+</div>
+
+<pre class="example" id="orgf454655">
+   amount  term  month  ...             education  gender bad
+0    1000    30      6  ...  High School or Below    male   0
+1    1000    30      7  ...              Bachelor  female   0
+2    1000    30      8  ...              Bachelor  female   0
+3    1000    15      9  ...               college    male   0
+4    1000    30     10  ...               college  female   0
+
+[5 rows x 7 columns]
+</pre>
+</div>
+</div>
+
+<div id="outline-container-scale-and-normalize-data" class="outline-3">
+<h3 id="scale-and-normalize-data"><span class="section-number-3">7.2.</span> Scale and Normalize Data</h3>
+<div class="outline-text-3" id="text-scale-and-normalize-data">
+<p>
+Finally, we are going to make sure all the numeric values are in the same scale.
+</p>
+
+<div class="src-name" id="org93b21a7">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">import</span> <span style="color: #4EC9B0;">pandas </span><span style="color: #569CD6;">as</span><span style="color: #4EC9B0;"> pd</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> pathlib </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">Path</span>
+
+<span style="color: #9CDCFE;">file_path</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">Path</span>(<span style="color: #CE9178;">"../resources/loans_data_encoded.csv"</span>)
+<span style="color: #9CDCFE;">encoded_df</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #ded492;">read_csv</span>(file_path)
+<span style="color: #C586C0;">print</span>(encoded_df.<span style="color: #ded492;">head</span>())
+</pre>
+</div>
+
+<pre class="example" id="orgbdaf6bc">
+   amount  term  ...  gender_female  gender_male
+0    1000    30  ...              0            1
+1    1000    30  ...              1            0
+2    1000    30  ...              1            0
+3    1000    15  ...              0            1
+4    1000    30  ...              1            0
+
+[5 rows x 11 columns]
+</pre>
+
+<div class="src-name" id="orgb376791">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.preprocessing </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">StandardScaler</span>
+
+<span style="color: #9CDCFE;">data_scaler</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">StandardScaler</span>()
+<span style="color: #9CDCFE;">loans_data_scaled</span> <span style="color: #e0e0e0;">=</span> data_scaler.<span style="color: #ded492;">fit_transform</span>(encoded_df)
+<span style="color: #C586C0;">print</span>(loans_data_scaled[:<span style="color: #BBCCAA;">5</span>])
+</pre>
+</div>
+
+<pre class="example" id="org4e21841">
+[[ 0.49337687  0.89789115  2.28404253 -0.81649658 -0.16890147 -0.39336295
+   1.17997648 -0.08980265 -0.88640526 -0.42665337  0.42665337]
+ [ 0.49337687  0.89789115  3.10658738 -0.81649658  0.12951102  2.54218146
+  -0.84747452 -0.08980265 -0.88640526  2.34382305 -2.34382305]
+ [ 0.49337687  0.89789115  0.3099349  -0.81649658  0.42792352  2.54218146
+  -0.84747452 -0.08980265 -0.88640526  2.34382305 -2.34382305]
+ [ 0.49337687 -0.97897162 -0.67711892 -0.81649658  0.72633602 -0.39336295
+  -0.84747452 -0.08980265  1.12815215 -0.42665337  0.42665337]
+ [ 0.49337687  0.89789115 -0.51260995 -0.81649658  1.02474851 -0.39336295
+  -0.84747452 -0.08980265  1.12815215  2.34382305 -2.34382305]]
+</pre>
+
+<div class="src-name" id="orgea2b4d9">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">dft</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #4EC9B0;">DataFrame</span>(loans_data_scaled, <span style="color: #9CDCFE;">columns</span><span style="color: #e0e0e0;">=</span>encoded_df.<span style="color: #9CDCFE;">columns</span>)
+<span style="color: #C586C0;">print</span>(dft.<span style="color: #ded492;">describe</span>())
+</pre>
+</div>
+
+<pre class="example" id="org1226458">
+             amount  ...   gender_male
+count  5.000000e+02  ...  5.000000e+02
+mean  -3.552714e-16  ...  3.907985e-17
+std    1.001002e+00  ...  1.001002e+00
+min   -5.586972e+00  ... -2.343823e+00
+25%    4.933769e-01  ...  4.266534e-01
+50%    4.933769e-01  ...  4.266534e-01
+75%    4.933769e-01  ...  4.266534e-01
+max    4.933769e-01  ...  4.266534e-01
+
+[8 rows x 11 columns]
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-decision-trees" class="outline-2">
+<h2 id="decision-trees"><span class="section-number-2">8.</span> Decision Trees</h2>
+<div class="outline-text-2" id="text-decision-trees">
+<p>
+Decision trees describe a sequence of optional values and are formed by root, nodes, splitting and leafs. The root is the first node in the tree, then we split it into different nodes, one for each decision, and so on, whenever we reach a node with no children, we call that a leaf.
+</p>
+</div>
+
+<div id="outline-container-scaling-the-data" class="outline-3">
+<h3 id="scaling-the-data"><span class="section-number-3">8.1.</span> Scaling the Data</h3>
+<div class="outline-text-3" id="text-scaling-the-data">
+<div class="src-name" id="org73247c7">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">import</span> <span style="color: #4EC9B0;">pandas </span><span style="color: #569CD6;">as</span><span style="color: #4EC9B0;"> pd</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> pathlib </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">Path</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> tree</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.preprocessing </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">StandardScaler</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.model_selection </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> train_test_split</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> confusion_matrix, accuracy_score, classification_report</span>
+
+<span style="color: #9CDCFE;">filepath</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">Path</span>(<span style="color: #CE9178;">"../resources/loans_data_encoded.csv"</span>)
+<span style="color: #9CDCFE;">df_loans</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #ded492;">read_csv</span>(filepath)
+<span style="color: #C586C0;">print</span>(df_loans.<span style="color: #ded492;">head</span>())
+</pre>
+</div>
+
+<pre class="example" id="org0f2a149">
+   amount  term  ...  gender_female  gender_male
+0    1000    30  ...              0            1
+1    1000    30  ...              1            0
+2    1000    30  ...              1            0
+3    1000    15  ...              0            1
+4    1000    30  ...              1            0
+
+[5 rows x 11 columns]
+</pre>
+
+<p>
+Our goal is to predict if a loan application is worthy of approval based on information we have in our <code>df_loans</code> df. So we will split the dataset into features (or inputs) and target (or outputs).
+</p>
+
+<div class="src-name" id="org0025b73">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">X</span> <span style="color: #e0e0e0;">=</span> df_loans.<span style="color: #ded492;">copy</span>()
+<span style="color: #9CDCFE;">X</span> <span style="color: #e0e0e0;">=</span> <span style="color: #e0e0e0;">X</span>.<span style="color: #ded492;">drop</span>(<span style="color: #CE9178;">"bad"</span>, <span style="color: #9CDCFE;">axis</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>)
+<span style="color: #9CDCFE;">y</span> <span style="color: #e0e0e0;">=</span> df_loans[<span style="color: #CE9178;">"bad"</span>].<span style="color: #9CDCFE;">values</span>
+<span style="color: #C586C0;">print</span>(y[:<span style="color: #BBCCAA;">10</span>])
+</pre>
+</div>
+
+<pre class="example" id="org41e7f07">
+[0 0 0 0 0 0 0 0 0 0]
+</pre>
+
+<p>
+Then we split the data for training.
+</p>
+
+<div class="src-name" id="org3857d1d">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">X_train</span>, <span style="color: #9CDCFE;">X_test</span>, <span style="color: #9CDCFE;">y_train</span>, <span style="color: #9CDCFE;">y_test</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">train_test_split</span>(<span style="color: #e0e0e0;">X</span>, y, <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">78</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #4EC9B0;">X_train</span>.<span style="color: #9CDCFE;">shape</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #4EC9B0;">X_test</span>.<span style="color: #9CDCFE;">shape</span>)
+<span style="color: #C586C0;">print</span>(y_train.<span style="color: #9CDCFE;">shape</span>)
+<span style="color: #C586C0;">print</span>(y_test.<span style="color: #9CDCFE;">shape</span>)
+</pre>
+</div>
+
+<pre class="example" id="orgdef2a69">
+(375, 10)
+(125, 10)
+(375,)
+(125,)
+</pre>
+
+<p>
+Alternatively, we can give a different train to test ratio<sup><a id="fnr.5" class="footref" href="#fn.5" role="doc-backlink">5</a></sup>.
+</p>
+
+<div class="src-name" id="org0813e5a">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">X_train2</span>, <span style="color: #9CDCFE;">X_test2</span>, <span style="color: #9CDCFE;">y_train2</span>, <span style="color: #9CDCFE;">y_test2</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">train_test_split</span>(<span style="color: #e0e0e0;">X</span>, y, <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">78</span>, <span style="color: #9CDCFE;">train_size</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">0.80</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #4EC9B0;">X_train2</span>.<span style="color: #9CDCFE;">shape</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #4EC9B0;">X_test2</span>.<span style="color: #9CDCFE;">shape</span>)
+<span style="color: #C586C0;">print</span>(y_train2.<span style="color: #9CDCFE;">shape</span>)
+<span style="color: #C586C0;">print</span>(y_test2.<span style="color: #9CDCFE;">shape</span>)
+</pre>
+</div>
+
+<pre class="example" id="orgd3eb2db">
+(400, 10)
+(100, 10)
+(400,)
+(100,)
+</pre>
+
+<p>
+We will use the standard scaler to normalize the data.
+</p>
+
+<div class="src-name" id="org45ba81a">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">scaler</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">StandardScaler</span>()
+<span style="color: #9CDCFE;">X_scaler</span> <span style="color: #e0e0e0;">=</span> scaler.<span style="color: #ded492;">fit</span>(<span style="color: #4EC9B0;">X_train</span>)
+
+<span style="color: #9CDCFE;">X_train_scaled</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">X_scaler</span>.<span style="color: #ded492;">transform</span>(<span style="color: #4EC9B0;">X_train</span>)
+<span style="color: #9CDCFE;">X_test_scaled</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">X_scaler</span>.<span style="color: #ded492;">transform</span>(<span style="color: #4EC9B0;">X_test</span>)
+
+<span style="color: #569CD6;">import</span> <span style="color: #4EC9B0;">numpy </span><span style="color: #569CD6;">as</span><span style="color: #4EC9B0;"> np</span>
+<span style="color: #9CDCFE;">df_train</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #4EC9B0;">DataFrame</span>(<span style="color: #4EC9B0;">X_train_scaled</span>, <span style="color: #9CDCFE;">columns</span> <span style="color: #e0e0e0;">=</span> <span style="color: #e0e0e0;">X</span>.<span style="color: #9CDCFE;">columns</span>)
+<span style="color: #9CDCFE;">df_test</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #4EC9B0;">DataFrame</span>(<span style="color: #4EC9B0;">X_test_scaled</span>, <span style="color: #9CDCFE;">columns</span> <span style="color: #e0e0e0;">=</span> <span style="color: #e0e0e0;">X</span>.<span style="color: #9CDCFE;">columns</span>)
+<span style="color: #C586C0;">print</span>(df_train.<span style="color: #ded492;">describe</span>())
+<span style="color: #C586C0;">print</span>(df_test.<span style="color: #ded492;">describe</span>())
+</pre>
+</div>
+
+<pre class="example" id="org09abc07">
+             amount  ...   gender_male
+count  3.750000e+02  ...  3.750000e+02
+mean   3.931670e-16  ... -9.000208e-17
+std    1.001336e+00  ...  1.001336e+00
+min   -5.367022e+00  ... -2.386719e+00
+25%    7.705463e-02  ...  4.189852e-01
+50%    4.958298e-01  ...  4.189852e-01
+75%    4.958298e-01  ...  4.189852e-01
+max    4.958298e-01  ...  4.189852e-01
+
+[8 rows x 10 columns]
+           amount        term  ...  gender_female  gender_male
+count  125.000000  125.000000  ...     125.000000   125.000000
+mean     0.080405    0.122970  ...       0.052373    -0.052373
+std      0.848449    0.960249  ...       1.053179     1.053179
+min     -5.367022   -1.930833  ...      -0.418985    -2.386719
+25%      0.495830   -0.939137  ...      -0.418985     0.418985
+50%      0.495830    0.920294  ...      -0.418985     0.418985
+75%      0.495830    0.920294  ...      -0.418985     0.418985
+max      0.495830    0.920294  ...       2.386719     0.418985
+
+[8 rows x 10 columns]
+</pre>
+</div>
+</div>
+
+<div id="outline-container-use-the-decision-tree-model" class="outline-3">
+<h3 id="use-the-decision-tree-model"><span class="section-number-3">8.2.</span> Use the Decision Tree Model</h3>
+<div class="outline-text-3" id="text-use-the-decision-tree-model">
+<div class="src-name" id="org489fa21">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">model</span> <span style="color: #e0e0e0;">=</span> tree.<span style="color: #4EC9B0;">DecisionTreeClassifier</span>()
+model.<span style="color: #ded492;">fit</span>(<span style="color: #4EC9B0;">X_train_scaled</span>, y_train)
+<span style="color: #9CDCFE;">predictions</span> <span style="color: #e0e0e0;">=</span> model.<span style="color: #ded492;">predict</span>(<span style="color: #4EC9B0;">X_test_scaled</span>)
+<span style="color: #C586C0;">print</span>(predictions)
+</pre>
+</div>
+
+<pre class="example" id="org108b80f">
+[1 0 1 1 1 0 0 0 0 0 0 0 0 1 1 0 1 1 1 1 0 1 1 0 0 1 0 1 1 0 1 0 0 0 0 0 0
+ 1 0 1 1 0 0 1 0 0 1 1 1 0 0 1 0 1 1 1 1 1 1 0 0 1 0 1 0 1 1 0 0 0 1 1 0 0
+ 1 1 0 0 0 1 1 0 0 0 0 0 0 1 0 1 1 0 0 0 1 0 0 0 1 0 0 1 0 1 0 1 0 0 0 0 0
+ 0 1 0 1 0 1 1 0 0 1 0 0 1 0]
+</pre>
+
+<p>
+Now we evaluate the model.
+</p>
+
+<div class="src-name" id="org6581f98">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">cm</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">confusion_matrix</span>(y_test, predictions)
+<span style="color: #9CDCFE;">cm_df</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #4EC9B0;">DataFrame</span>(
+    cm,
+    <span style="color: #9CDCFE;">index</span><span style="color: #e0e0e0;">=</span>[<span style="color: #CE9178;">"Actual 0"</span>, <span style="color: #CE9178;">"Actual 1"</span>],
+    <span style="color: #9CDCFE;">columns</span><span style="color: #e0e0e0;">=</span>[<span style="color: #CE9178;">"Predicted 0"</span>, <span style="color: #CE9178;">"Predicted 1"</span>],
+)
+<span style="color: #C586C0;">print</span>(cm_df)
+</pre>
+</div>
+
+<pre class="example" id="orgc06e50f">
+
+</pre>
+
+<div class="src-name" id="orgbc84904">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">trues</span> <span style="color: #e0e0e0;">=</span> cm[<span style="color: #BBCCAA;">0</span>][<span style="color: #BBCCAA;">0</span>] <span style="color: #e0e0e0;">+</span> cm[<span style="color: #BBCCAA;">1</span>][<span style="color: #BBCCAA;">0</span>]
+<span style="color: #9CDCFE;">positives</span> <span style="color: #e0e0e0;">=</span> cm[<span style="color: #BBCCAA;">0</span>][<span style="color: #BBCCAA;">0</span>] <span style="color: #e0e0e0;">+</span> cm[<span style="color: #BBCCAA;">0</span>][<span style="color: #BBCCAA;">1</span>]
+<span style="color: #9CDCFE;">true_positive</span> <span style="color: #e0e0e0;">=</span> cm[<span style="color: #BBCCAA;">0</span>][<span style="color: #BBCCAA;">0</span>]
+<span style="color: #9CDCFE;">false_positive</span> <span style="color: #e0e0e0;">=</span> cm[<span style="color: #BBCCAA;">0</span>][<span style="color: #BBCCAA;">1</span>]
+
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"trues, positives:"</span>, trues, positives)
+<span style="color: #9CDCFE;">acc_score</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">accuracy_score</span>(y_test, predictions)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"accuracy:"</span>, acc_score)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"precision:"</span>, true_positive <span style="color: #e0e0e0;">/</span> trues)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"recall"</span>, true_positive <span style="color: #e0e0e0;">/</span> positives)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"Classification Report</span><span style="color: #569CD6;">\n</span><span style="color: #CE9178;">"</span> <span style="color: #e0e0e0;">+</span>  <span style="color: #ded492;">classification_report</span>(y_test, predictions))
+</pre>
+</div>
+
+<pre class="example" id="orgc2f680e">
+trues, positives: 71 84
+accuracy: 0.56
+precision: 0.704225352112676
+recall 0.5952380952380952
+Classification Report
+              precision    recall  f1-score   support
+
+           0       0.70      0.60      0.65        84
+           1       0.37      0.49      0.42        41
+
+    accuracy                           0.56       125
+   macro avg       0.54      0.54      0.53       125
+weighted avg       0.59      0.56      0.57       125
+</pre>
+
+<p>
+In resume, precision is the measure of how reliable a positive classification is. The precision of a good load application in this case is 0.56. The precision of a bad loan application is 0.358. A low precision is indicative of a large number of false positives<sup><a id="fnr.6" class="footref" href="#fn.6" role="doc-backlink">6</a></sup>.
+</p>
+
+<p>
+The model is not good enough because the precision is too low! (0.56).
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-ensemble-learning" class="outline-2">
+<h2 id="ensemble-learning"><span class="section-number-2">9.</span> Ensemble Learning</h2>
+<div class="outline-text-2" id="text-ensemble-learning">
+<p>
+The concept of ensemble learning is the process of combining multiple models, like decision tree algorithms, to help improve the accuracy and robustness, and decrease variance of the model.
+</p>
+
+<p>
+Weak learnes are algorithms that will make inaccurate and imprecise predictions because they are poor at learning adequately as result of limited data. However, weak learners should not be considered unworthy as there are models that can combine many weak learners to create a more accurate and robust prediction engine.
+</p>
+
+<p>
+If we combine a decision tree that is a weak learner (low accuracy) with other trees we may get a more accurate prediction. The algorithms for combining them can be Random Forests, GradientBoostedTree and XGBoost.
+</p>
+</div>
+
+<div id="outline-container-random-forests" class="outline-3">
+<h3 id="random-forests"><span class="section-number-3">9.1.</span> Random Forests</h3>
+<div class="outline-text-3" id="text-random-forests">
+<p>
+A random forest is an algorithm that samples the data and builds several smaller, simpler decision trees, each tree is simpler because is built from a random subset of features.
+</p>
+
+<p>
+The trees are fed smaller samples of the data and because the sample is small, they are only slightly better than a random guess. However, many of them can combine for creating a strong learner.
+</p>
+
+<p>
+Random forest are resilient to overfitting as the data is ditributed, they can also be used to rank the importance of input variables in a natural way. They can handle thousands of input variables and are robust to outliers and nonlinear data. They are also efficient on large dataset.
+</p>
+
+<p>
+We will use the ensemble module and the RandomForestClassifier class.
+</p>
+
+<div class="src-name" id="org7752455">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">import</span> <span style="color: #4EC9B0;">pandas </span><span style="color: #569CD6;">as</span><span style="color: #4EC9B0;"> pd</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> pathlib </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">Path</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.ensemble </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">RandomForestClassifier</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.preprocessing </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">StandardScaler</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.model_selection </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> train_test_split</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> confusion_matrix, accuracy_score, classification_report</span>
+
+<span style="color: #9CDCFE;">file_path</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">Path</span>(<span style="color: #CE9178;">"../resources/loans_data_encoded.csv"</span>)
+<span style="color: #9CDCFE;">df_loans</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #ded492;">read_csv</span>(file_path)
+<span style="color: #C586C0;">print</span>(df_loans.<span style="color: #ded492;">head</span>())
+</pre>
+</div>
+
+<pre class="example" id="org31627e8">
+   amount  term  ...  gender_female  gender_male
+0    1000    30  ...              0            1
+1    1000    30  ...              1            0
+2    1000    30  ...              1            0
+3    1000    15  ...              0            1
+4    1000    30  ...              1            0
+
+[5 rows x 11 columns]
+</pre>
+
+<p>
+We will prepare the data.
+</p>
+
+<div class="src-name" id="orgc28a871">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">X</span> <span style="color: #e0e0e0;">=</span> df_loans.<span style="color: #ded492;">copy</span>()
+<span style="color: #9CDCFE;">X</span> <span style="color: #e0e0e0;">=</span> <span style="color: #e0e0e0;">X</span>.<span style="color: #ded492;">drop</span>(<span style="color: #CE9178;">"bad"</span>, <span style="color: #9CDCFE;">axis</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>)
+<span style="color: #9CDCFE;">y</span> <span style="color: #e0e0e0;">=</span> df_loans[<span style="color: #CE9178;">"bad"</span>].<span style="color: #ded492;">ravel</span>()
+<span style="color: #9CDCFE;">X_train</span>, <span style="color: #9CDCFE;">X_test</span>, <span style="color: #9CDCFE;">y_train</span>, <span style="color: #9CDCFE;">y_test</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">train_test_split</span>(<span style="color: #e0e0e0;">X</span>, y, <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">78</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #4EC9B0;">X_train</span>.<span style="color: #9CDCFE;">shape</span>, <span style="color: #4EC9B0;">X_test</span>.<span style="color: #9CDCFE;">shape</span>, y_train.<span style="color: #9CDCFE;">shape</span>, y_test.<span style="color: #9CDCFE;">shape</span>)
+</pre>
+</div>
+
+<pre class="example" id="orgaf9686e">
+(375, 10) (125, 10) (375,) (125,)
+</pre>
+
+<p>
+Then we scale it.
+</p>
+
+<div class="src-name" id="org2016802">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">scaler</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">StandardScaler</span>()
+<span style="color: #9CDCFE;">X_scaler</span> <span style="color: #e0e0e0;">=</span> scaler.<span style="color: #ded492;">fit</span>(<span style="color: #4EC9B0;">X_train</span>)
+<span style="color: #9CDCFE;">X_train_scaled</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">X_scaler</span>.<span style="color: #ded492;">transform</span>(<span style="color: #4EC9B0;">X_train</span>)
+<span style="color: #9CDCFE;">X_test_scaled</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">X_scaler</span>.<span style="color: #ded492;">transform</span>(<span style="color: #4EC9B0;">X_test</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #4EC9B0;">X_train_scaled</span>[:<span style="color: #BBCCAA;">5</span>])
+</pre>
+</div>
+
+<pre class="example" id="org240e6ea">
+[[ 0.49582979 -0.93913666  0.62959256  1.26612714  2.64172735 -0.811968
+  -0.10383483 -0.93541435  2.38671921 -2.38671921]
+ [ 0.49582979  0.92029442 -0.69123099  1.56549516 -0.3785402  -0.811968
+  -0.10383483  1.06904497 -0.41898519  0.41898519]
+ [ 0.49582979  0.92029442 -1.18653982  0.96675912 -0.3785402   1.23157563
+  -0.10383483 -0.93541435 -0.41898519  0.41898519]
+ [ 0.49582979  0.92029442 -0.85633394  0.06865507 -0.3785402  -0.811968
+  -0.10383483  1.06904497  2.38671921 -2.38671921]
+ [-1.17927084 -0.93913666 -0.69123099  1.56549516 -0.3785402  -0.811968
+  -0.10383483  1.06904497  2.38671921 -2.38671921]]
+</pre>
+
+<p>
+Now we create and fit the Random Forest Model<sup><a id="fnr.7" class="footref" href="#fn.7" role="doc-backlink">7</a></sup>. The best practice is to use between 64 and 128 random forest although they can be higher.
+</p>
+
+<div class="src-name" id="org2731fc3">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">rf_model</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">RandomForestClassifier</span>(<span style="color: #9CDCFE;">n_estimators</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">128</span>, <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">78</span>)
+<span style="color: #9CDCFE;">rf_model</span> <span style="color: #e0e0e0;">=</span> rf_model.<span style="color: #ded492;">fit</span>(<span style="color: #4EC9B0;">X_train_scaled</span>, y_train)
+<span style="color: #9CDCFE;">predictions</span> <span style="color: #e0e0e0;">=</span> rf_model.<span style="color: #ded492;">predict</span>(<span style="color: #4EC9B0;">X_test_scaled</span>)
+<span style="color: #C586C0;">print</span>(predictions[:<span style="color: #BBCCAA;">10</span>])
+</pre>
+</div>
+
+<pre class="example" id="orgc6931d7">
+[0 0 1 0 1 0 0 0 0 0]
+</pre>
+
+<p>
+Evaluate the model.
+</p>
+
+<div class="src-name" id="orgf094bf4">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">cm</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">confusion_matrix</span>(y_test, predictions)
+<span style="color: #9CDCFE;">cm_df</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #4EC9B0;">DataFrame</span>(
+    cm,
+    <span style="color: #9CDCFE;">index</span><span style="color: #e0e0e0;">=</span>[<span style="color: #CE9178;">"Actual 0"</span>, <span style="color: #CE9178;">"Actual 1"</span>],
+    <span style="color: #9CDCFE;">columns</span><span style="color: #e0e0e0;">=</span>[<span style="color: #CE9178;">"Predicted 0"</span>, <span style="color: #CE9178;">"Predicted 1"</span>],
+)
+<span style="color: #C586C0;">print</span>(cm_df)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"accuracy"</span>, <span style="color: #ded492;">accuracy_score</span>(y_test, predictions))
+<span style="color: #C586C0;">print</span>(<span style="color: #ded492;">classification_report</span>(y_test, predictions))
+</pre>
+</div>
+
+<pre class="example" id="orgb7a2a54">
+          Predicted 0  Predicted 1
+Actual 0           51           33
+Actual 1           23           18
+accuracy 0.552
+              precision    recall  f1-score   support
+
+           0       0.69      0.61      0.65        84
+           1       0.35      0.44      0.39        41
+
+    accuracy                           0.55       125
+   macro avg       0.52      0.52      0.52       125
+weighted avg       0.58      0.55      0.56       125
+</pre>
+
+<p>
+We got lof precision and low F1 score so the model is not good.
+</p>
+
+<p>
+However, we can rank the importance of the features. If we inspect the model, we can get an array of scores for the features in the <code>X_test</code> set, whose sum equals 1.0.
+</p>
+
+<div class="src-name" id="org60f382b">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">importances</span> <span style="color: #e0e0e0;">=</span> rf_model.<span style="color: #9CDCFE;">feature_importances_</span>
+<span style="color: #C586C0;">print</span>(importances)
+</pre>
+</div>
+
+<pre class="example" id="org65347b6">
+[0.05454782 0.07997292 0.43280448 0.32973986 0.01887172 0.02110219
+ 0.00271658 0.02151063 0.01887818 0.01985562]
+</pre>
+
+<p>
+Each number represents a column. So if we sort them together, we can get a better description of what features are more important.
+</p>
+
+<div class="src-name" id="org6598deb">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">importances_sorted</span> <span style="color: #e0e0e0;">=</span> <span style="color: #C586C0;">sorted</span>(<span style="color: #C586C0;">zip</span>(rf_model.<span style="color: #9CDCFE;">feature_importances_</span>, <span style="color: #e0e0e0;">X</span>.<span style="color: #9CDCFE;">columns</span>), <span style="color: #9CDCFE;">reverse</span><span style="color: #e0e0e0;">=</span><span style="color: #569CD6;">True</span>)
+<span style="color: #C586C0;">print</span>(importances_sorted)
+</pre>
+</div>
+
+<pre class="example" id="orgb0e376e">
+[(0.43280447750315343, 'age'), (0.32973986443922343, 'month_num'), (0.07997292251445517, 'term'), (0.05454782107242418, 'amount'), (0.021510631303272416, 'education_college'), (0.021102188881175144, 'education_High School or Below'), (0.01985561654170213, 'gender_male'), (0.018878176828577283, 'gender_female'), (0.018871722006693077, 'education_Bachelor'), (0.002716578909323729, 'education_Master or Above')]
+</pre>
+
+<p>
+However, because this is a random forest model, dropping low ranking features won&rsquo;t help us improve the model.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-bootstrap-aggregation" class="outline-2">
+<h2 id="bootstrap-aggregation"><span class="section-number-2">10.</span> Bootstrap aggregation</h2>
+<div class="outline-text-2" id="text-bootstrap-aggregation">
+<p>
+Bootstrapping is a sampling technique in which samples are randomly selected, then returned to the general pool and replaced, or put back into the general pool. Examples:
+</p>
+
+<p>
+Sample 1: A, A, A, B, D
+Sample 2: A, B, B, C, E
+Sample 3: B, C, D, D, E
+</p>
+
+<p>
+We can have the same datapoint appearing multiple times in the same sample. In summary is a technique with which a number of samples are made and in which an observation can occur multiple times.
+</p>
+</div>
+
+<div id="outline-container-aggregation" class="outline-3">
+<h3 id="aggregation"><span class="section-number-3">10.1.</span> Aggregation</h3>
+<div class="outline-text-3" id="text-aggregation">
+<p>
+In each aggregation step, different classifiers are run, using the samples drawn in the bootstrapping stage. Each classifier will vote for a label (a prediction). The final prediction is the one with the most votes.
+</p>
+
+<p>
+So the order is Dataset -&gt; Sample N -&gt; Prediction N -&gt; Vote, where each Sample has a Prediction and the results of the predictions are counted and output as a Final Prediction.
+</p>
+</div>
+</div>
+
+<div id="outline-container-boosting" class="outline-3">
+<h3 id="boosting"><span class="section-number-3">10.2.</span> Boosting</h3>
+<div class="outline-text-3" id="text-boosting">
+<p>
+Like bagging, boosting is a technique to combine a set of weak learners into a strong learner. We saw in bagging that the different models work independently of one another. In contrast, boosting trains a sequence of weak models.
+</p>
+
+<p>
+So instead of a parallel process we have a series of Sample -&gt; Prediction in which the weakness of each model is passed to the next training set, then all models are combined for an ensemble prediction.
+</p>
+</div>
+</div>
+
+<div id="outline-container-adaptive-boosting" class="outline-3">
+<h3 id="adaptive-boosting"><span class="section-number-3">10.3.</span> Adaptive Boosting</h3>
+<div class="outline-text-3" id="text-adaptive-boosting">
+<p>
+In AdaBoost, a model is trained then evaluated. After evaluating the errors of the first model, another model is trained. This time, however, the model gives extra weight to the errors from the previous model, so the subsequent models minimize similar errors. This process is repeated until the error rate is minimized.
+</p>
+</div>
+</div>
+
+<div id="outline-container-gradient-boosting" class="outline-3">
+<h3 id="gradient-boosting"><span class="section-number-3">10.4.</span> Gradient Boosting</h3>
+<div class="outline-text-3" id="text-gradient-boosting">
+<p>
+It is an ensemble method that works sequentially. Gradient boosting does not seek to minimize errors by adjusting the weight of the errors, but it rather does the following:
+</p>
+
+<ol class="org-ol">
+<li>A small tree (stump) is added to the model and the errors are evaluated.</li>
+<li>A second stump is added to the first and attempts to minimize the errors from the first stump. These errors are called pseudo-residuals.</li>
+<li>A third stump is added to the first two and attempts to minimize the pseudo-residuals from the previous two.</li>
+<li>The process is repeated until the errors are minimized as much as possible or until a specified number of repetitions has been reached.</li>
+</ol>
+
+<p>
+The learning rate refers to how aggressively pseudo-residuals are corrected during each iteration. In general, it is preferable to begin with a lower learning rate and, if necessary, adjust the rate updward.
+</p>
+</div>
+</div>
+
+<div id="outline-container-boosting-in-practice" class="outline-3">
+<h3 id="boosting-in-practice"><span class="section-number-3">10.5.</span> Boosting in Practice</h3>
+<div class="outline-text-3" id="text-boosting-in-practice">
+<div class="src-name" id="org70d74dd">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">import</span> <span style="color: #4EC9B0;">pandas </span><span style="color: #569CD6;">as</span><span style="color: #4EC9B0;"> pd</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> pathlib </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">Path</span>
+
+<span style="color: #9CDCFE;">filepath</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">Path</span>(<span style="color: #CE9178;">"../resources/loans_data_encoded.csv"</span>)
+<span style="color: #9CDCFE;">loans_df</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #ded492;">read_csv</span>(filepath)
+<span style="color: #C586C0;">print</span>(loans_df.<span style="color: #ded492;">head</span>())
+</pre>
+</div>
+
+<pre class="example" id="org352175b">
+   amount  term  ...  gender_female  gender_male
+0    1000    30  ...              0            1
+1    1000    30  ...              1            0
+2    1000    30  ...              1            0
+3    1000    15  ...              0            1
+4    1000    30  ...              1            0
+
+[5 rows x 11 columns]
+</pre>
+
+<p>
+We prepare the data.
+</p>
+
+<div class="src-name" id="org3d2a117">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.model_selection </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> train_test_split</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.preprocessing </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">StandardScaler</span>
+
+<span style="color: #9CDCFE;">X</span> <span style="color: #e0e0e0;">=</span> loans_df.<span style="color: #ded492;">copy</span>()
+<span style="color: #9CDCFE;">X</span> <span style="color: #e0e0e0;">=</span> <span style="color: #e0e0e0;">X</span>.<span style="color: #ded492;">drop</span>(<span style="color: #CE9178;">"bad"</span>, <span style="color: #9CDCFE;">axis</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>)
+<span style="color: #9CDCFE;">y</span> <span style="color: #e0e0e0;">=</span> loans_df[<span style="color: #CE9178;">"bad"</span>].<span style="color: #9CDCFE;">values</span>
+<span style="color: #579C4C;"># split</span>
+<span style="color: #9CDCFE;">X_train</span>, <span style="color: #9CDCFE;">X_test</span>, <span style="color: #9CDCFE;">y_train</span>, <span style="color: #9CDCFE;">y_test</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">train_test_split</span>(<span style="color: #e0e0e0;">X</span>,
+   y, <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>)
+<span style="color: #579C4C;"># scale</span>
+<span style="color: #9CDCFE;">scaler</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">StandardScaler</span>()
+<span style="color: #9CDCFE;">X_scaler</span> <span style="color: #e0e0e0;">=</span> scaler.<span style="color: #ded492;">fit</span>(<span style="color: #4EC9B0;">X_train</span>)
+<span style="color: #9CDCFE;">X_train_scaled</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">X_scaler</span>.<span style="color: #ded492;">transform</span>(<span style="color: #4EC9B0;">X_train</span>)
+<span style="color: #9CDCFE;">X_test_scaled</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">X_scaler</span>.<span style="color: #ded492;">transform</span>(<span style="color: #4EC9B0;">X_test</span>)
+</pre>
+</div>
+
+<pre class="example" id="orgaf80fb0">
+
+</pre>
+
+<p>
+We will identify the learning rate that yield the best performance.
+</p>
+
+<div class="src-name" id="org8ca9a21">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.ensemble </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">GradientBoostingClassifier</span>
+
+<span style="color: #9CDCFE;">learning_rates</span> <span style="color: #e0e0e0;">=</span> [<span style="color: #BBCCAA;">0.05</span>, <span style="color: #BBCCAA;">0.1</span>, <span style="color: #BBCCAA;">0.25</span>, <span style="color: #BBCCAA;">0.5</span>, <span style="color: #BBCCAA;">0.75</span>, <span style="color: #BBCCAA;">1</span>]
+<span style="color: #569CD6;">for</span> <span style="color: #9CDCFE;">rate</span> <span style="color: #569CD6;">in</span> learning_rates:
+    <span style="color: #9CDCFE;">classifier</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">GradientBoostingClassifier</span>(
+        <span style="color: #9CDCFE;">n_estimators</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">20</span>,
+        <span style="color: #9CDCFE;">learning_rate</span><span style="color: #e0e0e0;">=</span>rate,
+        <span style="color: #9CDCFE;">max_features</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">5</span>,
+        <span style="color: #9CDCFE;">max_depth</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">3</span>,
+        <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">0</span>,
+    )
+    classifier.<span style="color: #ded492;">fit</span>(<span style="color: #4EC9B0;">X_train_scaled</span>, y_train.<span style="color: #ded492;">ravel</span>())
+
+    <span style="color: #579C4C;"># results</span>
+    <span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"Learning rate: "</span>, rate)
+    <span style="color: #C586C0;">print</span>(
+        <span style="color: #CE9178;">"Accuracy score (training): {0:.3f}"</span>
+        .<span style="color: #ded492;">format</span>(
+            classifier.<span style="color: #ded492;">score</span>(
+                <span style="color: #4EC9B0;">X_train_scaled</span>,
+                y_train)
+        ))
+    <span style="color: #C586C0;">print</span>(
+       <span style="color: #CE9178;">"Accuracy score (validation): {0:.3f}"</span>
+       .<span style="color: #ded492;">format</span>(
+           classifier.<span style="color: #ded492;">score</span>(
+               <span style="color: #4EC9B0;">X_test_scaled</span>,
+               y_test)
+       ))
+</pre>
+</div>
+
+<pre class="example" id="org583aad3">
+Learning rate:  0.05
+Accuracy score (training): 0.611
+Accuracy score (validation): 0.632
+Learning rate:  0.1
+Accuracy score (training): 0.653
+Accuracy score (validation): 0.584
+Learning rate:  0.25
+Accuracy score (training): 0.720
+Accuracy score (validation): 0.536
+Learning rate:  0.5
+Accuracy score (training): 0.773
+Accuracy score (validation): 0.544
+Learning rate:  0.75
+Accuracy score (training): 0.784
+Accuracy score (validation): 0.568
+Learning rate:  1
+Accuracy score (training): 0.835
+Accuracy score (validation): 0.560
+</pre>
+
+<p>
+We get the training and testing results. A model that performs well on the training set but poorply on the testing set is said to be &ldquo;overfit&rdquo;. In this case the case with a learning rate of 0.05 is best because of the high validation score.
+</p>
+
+<p>
+Now we can use that model for our gradient boosting.
+</p>
+
+<div class="src-name" id="org347ce5a">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">classifier</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">GradientBoostingClassifier</span>(
+    <span style="color: #9CDCFE;">n_estimators</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">20</span>,
+    <span style="color: #9CDCFE;">learning_rate</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">0.5</span>,
+    <span style="color: #9CDCFE;">max_features</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">5</span>,
+    <span style="color: #9CDCFE;">max_depth</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">3</span>,
+    <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">0</span>
+)
+classifier.<span style="color: #ded492;">fit</span>(<span style="color: #4EC9B0;">X_train_scaled</span>, y_train)
+<span style="color: #9CDCFE;">predictions</span> <span style="color: #e0e0e0;">=</span> classifier.<span style="color: #ded492;">predict</span>(<span style="color: #4EC9B0;">X_test_scaled</span>)
+<span style="color: #C586C0;">print</span>(predictions[:<span style="color: #BBCCAA;">5</span>])
+</pre>
+</div>
+
+<pre class="example" id="org740b7e2">
+[1 0 1 0 1]
+</pre>
+
+<p>
+Then we assess the performance of the model.
+</p>
+
+<div class="src-name" id="org5418ec4">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> confusion_matrix</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> accuracy_score</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> classification_report</span>
+
+<span style="color: #9CDCFE;">acc_score</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">accuracy_score</span>(y_test, predictions)
+<span style="color: #9CDCFE;">cm</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">confusion_matrix</span>(y_test, predictions)
+<span style="color: #9CDCFE;">cm_df</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #4EC9B0;">DataFrame</span>(
+   cm, <span style="color: #9CDCFE;">index</span><span style="color: #e0e0e0;">=</span>[<span style="color: #CE9178;">"Actual 0"</span>, <span style="color: #CE9178;">"Actual 1"</span>],
+   <span style="color: #9CDCFE;">columns</span><span style="color: #e0e0e0;">=</span>[<span style="color: #CE9178;">"Predicted 0"</span>, <span style="color: #CE9178;">"Predicted 1"</span>]
+)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">f"Accuracy Score : </span><span style="color: #569CD6; background-color: #252525;">{</span><span style="color: #9CDCFE; background-color: #252525;">acc_score</span><span style="color: #569CD6; background-color: #252525;">}</span><span style="color: #CE9178;">"</span>)
+<span style="color: #C586C0;">print</span>(cm_df)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"Classification Report"</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #ded492;">classification_report</span>(y_test, predictions))
+</pre>
+</div>
+
+<pre class="example" id="org4db6bf3">
+Accuracy Score : 0.544
+          Predicted 0  Predicted 1
+Actual 0           53           31
+Actual 1           26           15
+Classification Report
+              precision    recall  f1-score   support
+
+           0       0.67      0.63      0.65        84
+           1       0.33      0.37      0.34        41
+
+    accuracy                           0.54       125
+   macro avg       0.50      0.50      0.50       125
+weighted avg       0.56      0.54      0.55       125
+</pre>
+
+<p>
+The model has a slightly higher score but is still too low for using it.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-oversampling" class="outline-2">
+<h2 id="oversampling"><span class="section-number-2">11.</span> Oversampling</h2>
+<div class="outline-text-2" id="text-oversampling">
+<p>
+Class imbalance is a common problem in classification, it occurs when one class is much larger than the other class. In this case, the non-fraudulent class is much larger than the fraudulent class. The existing classes in the dataset aren&rsquo;t equally represented.
+</p>
+
+<p>
+This can cause ML models to be biased toward the majority class, in this case, the model will be much better predicting non-fraudulent transactions than fraudulent ones.
+</p>
+
+<p>
+We can use oversampling to increase the instances of one class in the dataset. We choose more instances from that class for training until it&rsquo;s larger.
+</p>
+</div>
+
+<div id="outline-container-random-oversampling" class="outline-3">
+<h3 id="random-oversampling"><span class="section-number-3">11.1.</span> Random Oversampling</h3>
+<div class="outline-text-3" id="text-random-oversampling">
+<p>
+Instances of the minority class are randomly selected and added to the training set until the majority and minority classes are balanced.
+</p>
+
+<div class="src-name" id="orgc15dfcc">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">import</span> <span style="color: #4EC9B0;">matplotlib.pyplot </span><span style="color: #569CD6;">as</span><span style="color: #4EC9B0;"> plt</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.datasets </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> make_blobs</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> collections </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">Counter</span>
+
+<span style="color: #9CDCFE;">imgpath</span> <span style="color: #e0e0e0;">=</span> <span style="color: #CE9178;">"../resources/oversampling1.png"</span>
+<span style="color: #9CDCFE;">X</span>, <span style="color: #9CDCFE;">y</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">make_blobs</span>(
+    <span style="color: #9CDCFE;">n_samples</span><span style="color: #e0e0e0;">=</span>[<span style="color: #BBCCAA;">600</span>, <span style="color: #BBCCAA;">60</span>],
+    <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>,
+    <span style="color: #9CDCFE;">cluster_std</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">5</span>
+)
+<span style="color: #9CDCFE;">fig</span>, <span style="color: #9CDCFE;">ax</span> <span style="color: #e0e0e0;">=</span> plt.<span style="color: #ded492;">subplots</span>(<span style="color: #9CDCFE;">figsize</span><span style="color: #e0e0e0;">=</span>(<span style="color: #BBCCAA;">5</span>, <span style="color: #BBCCAA;">4</span>))
+ax.<span style="color: #ded492;">scatter</span>(<span style="color: #e0e0e0;">X</span>[:, <span style="color: #BBCCAA;">0</span>], <span style="color: #e0e0e0;">X</span>[:, <span style="color: #BBCCAA;">1</span>], <span style="color: #9CDCFE;">c</span><span style="color: #e0e0e0;">=</span>y)
+fig.<span style="color: #ded492;">savefig</span>(imgpath)
+<span style="color: #C586C0;">print</span>(imgpath)
+</pre>
+</div>
+
+<div class="org" id="org22cda79">
+
+<div id="orga98704b" class="figure">
+<p><img src="../resources/oversampling1.png" alt="oversampling1.png" />
+</p>
+</div>
+
+</div>
+
+<p>
+We can see that the purple class visibly outnumbers the yellow class.
+</p>
+
+<div class="src-name" id="org83f0417">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.model_selection </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> train_test_split</span>
+
+<span style="color: #9CDCFE;">X_train</span>, <span style="color: #9CDCFE;">X_test</span>, <span style="color: #9CDCFE;">y_train</span>, <span style="color: #9CDCFE;">y_test</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">train_test_split</span>(<span style="color: #e0e0e0;">X</span>, y, <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #4EC9B0;">Counter</span>(y_train))
+</pre>
+</div>
+
+<pre class="example" id="org1b48cac">
+Counter({0: 451, 1: 44})
+</pre>
+
+<p>
+We can use <code>imblearn</code> for oversampling. The data is resampled using the <code>fit_resample</code> method.
+</p>
+
+<div class="src-name" id="orge0f5766">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> imblearn.over_sampling </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">RandomOverSampler</span>
+
+<span style="color: #9CDCFE;">ros</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">RandomOverSampler</span>(<span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>)
+<span style="color: #9CDCFE;">X_resampled</span>, <span style="color: #9CDCFE;">y_resampled</span> <span style="color: #e0e0e0;">=</span> ros.<span style="color: #ded492;">fit_resample</span>(<span style="color: #4EC9B0;">X_train</span>, y_train)
+<span style="color: #C586C0;">print</span>(<span style="color: #4EC9B0;">X_resampled</span>.<span style="color: #9CDCFE;">shape</span>, y_resampled.<span style="color: #9CDCFE;">shape</span>)
+</pre>
+</div>
+
+<pre class="example" id="org27f4f03">
+(35064, 5) (35064,)
+</pre>
+
+<p>
+Now that the data is ready, we can use a model for making predictions.
+</p>
+
+<div class="src-name" id="org45c1fbd">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.linear_model </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">LogisticRegression</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> confusion_matrix</span>
+
+
+<span style="color: #9CDCFE;">model</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">LogisticRegression</span>(<span style="color: #9CDCFE;">solver</span><span style="color: #e0e0e0;">=</span><span style="color: #CE9178;">'lbfgs'</span>, <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>)
+model.<span style="color: #ded492;">fit</span>(<span style="color: #4EC9B0;">X_resampled</span>, y_resampled)
+<span style="color: #9CDCFE;">y_pred</span> <span style="color: #e0e0e0;">=</span> model.<span style="color: #ded492;">predict</span>(<span style="color: #4EC9B0;">X_test</span>)
+<span style="color: #9CDCFE;">cm</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">confusion_matrix</span>(y_test, y_pred)
+<span style="color: #C586C0;">print</span>(cm)
+</pre>
+</div>
+
+<pre class="example" id="org5ac9379">
+[[131  18]
+ [  1  15]]
+</pre>
+
+<p>
+We are going to use a balanced accuracy score instead of a regular one, as well as a classification report imbalanced.
+</p>
+
+<div class="src-name" id="org7d4b9a4">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> balanced_accuracy_score</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> imblearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> classification_report_imbalanced</span>
+
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"accuracy:"</span>, <span style="color: #ded492;">balanced_accuracy_score</span>(y_test, y_pred))
+<span style="color: #C586C0;">print</span>(<span style="color: #ded492;">classification_report_imbalanced</span>(y_test, y_pred))
+</pre>
+</div>
+
+<pre class="example" id="org622e879">
+accuracy: 0.9083473154362416
+                   pre       rec       spe        f1       geo       iba       sup
+
+          0       0.99      0.88      0.94      0.93      0.91      0.82       149
+          1       0.45      0.94      0.88      0.61      0.91      0.83        16
+
+avg / total       0.94      0.88      0.93      0.90      0.91      0.82       165
+</pre>
+
+<p>
+The score skyrocketed for the majority class but it is still low for the minority class (0.45).
+</p>
+</div>
+</div>
+
+<div id="outline-container-synthetic-minority-oversampling-technique" class="outline-3">
+<h3 id="synthetic-minority-oversampling-technique"><span class="section-number-3">11.2.</span> Synthetic Minority Oversampling Technique</h3>
+<div class="outline-text-3" id="text-synthetic-minority-oversampling-technique">
+<p>
+SMOTE is another oversampling approach to deal with unbalanced datasets, here the size of the minority is also increased. In SMOTE, instead of selecting observations twice, new observations are created by interpolation.
+</p>
+
+<div class="src-name" id="org1b98142">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> imblearn.over_sampling </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #e0e0e0;">SMOTE</span>
+
+<span style="color: #9CDCFE;">X_resampled</span>, <span style="color: #9CDCFE;">y_resampled</span> <span style="color: #e0e0e0;">=</span> <span style="color: #e0e0e0;">SMOTE</span>(
+    <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>,
+    <span style="color: #9CDCFE;">sampling_strategy</span><span style="color: #e0e0e0;">=</span><span style="color: #CE9178;">'auto'</span>
+).<span style="color: #ded492;">fit_resample</span>(<span style="color: #4EC9B0;">X_train</span>, y_train)
+<span style="color: #C586C0;">print</span>(<span style="color: #4EC9B0;">X_resampled</span>.<span style="color: #9CDCFE;">shape</span>, y_resampled.<span style="color: #9CDCFE;">shape</span>)
+</pre>
+</div>
+
+<pre class="example" id="orgb62bc0b">
+(902, 2) (902,)
+</pre>
+
+<p>
+We will repeat the steps for making a prediction but with the new model.
+</p>
+
+<div class="src-name" id="org7eefd35">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">model</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">LogisticRegression</span>(<span style="color: #9CDCFE;">solver</span><span style="color: #e0e0e0;">=</span><span style="color: #CE9178;">'lbfgs'</span>, <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>)
+model.<span style="color: #ded492;">fit</span>(<span style="color: #4EC9B0;">X_resampled</span>, y_resampled)
+
+<span style="color: #9CDCFE;">y_pred</span> <span style="color: #e0e0e0;">=</span> model.<span style="color: #ded492;">predict</span>(<span style="color: #4EC9B0;">X_test</span>)
+<span style="color: #ded492;">balanced_accuracy_score</span>(y_test, y_pred)
+
+<span style="color: #9CDCFE;">cm</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">confusion_matrix</span>(y_test, y_pred)
+
+<span style="color: #C586C0;">print</span>(<span style="color: #ded492;">classification_report_imbalanced</span>(y_test, y_pred))
+</pre>
+</div>
+
+<pre class="example" id="org7323ffe">
+                   pre       rec       spe        f1       geo       iba       sup
+
+          0       0.99      0.89      0.94      0.94      0.91      0.83       149
+          1       0.48      0.94      0.89      0.64      0.91      0.84        16
+
+avg / total       0.94      0.90      0.93      0.91      0.91      0.83       165
+</pre>
+
+<p>
+The results in this case are slighlty better but not by much. Oversampling techniques cannot overcome the deficiencies of the original dataset.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-undersampling" class="outline-2">
+<h2 id="undersampling"><span class="section-number-2">12.</span> Undersampling</h2>
+<div class="outline-text-2" id="text-undersampling">
+<p>
+Instead of increasing the number of the minority class, the size of the majority class is decreased.
+</p>
+
+<p>
+Oversampling addresses class imbalance by duplicating or mimicking existing data, in contrast, undersampling only uses actual data. However, undersampling involves loss of data of the majority class so it is only practical with enough data in the dataset.
+</p>
+</div>
+
+<div id="outline-container-random-undersampling" class="outline-3">
+<h3 id="random-undersampling"><span class="section-number-3">12.1.</span> Random Undersampling</h3>
+<div class="outline-text-3" id="text-random-undersampling">
+<div class="src-name" id="orgcbf5560">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">import</span> <span style="color: #4EC9B0;">pandas </span><span style="color: #569CD6;">as</span><span style="color: #4EC9B0;"> pd</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> pathlib </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">Path</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> collections </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">Counter</span>
+
+<span style="color: #9CDCFE;">data</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">Path</span>(<span style="color: #CE9178;">'../resources/cc_default.csv'</span>)
+<span style="color: #9CDCFE;">df</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #ded492;">read_csv</span>(data)
+<span style="color: #C586C0;">print</span>(df.<span style="color: #ded492;">head</span>())
+</pre>
+</div>
+
+<pre class="example" id="orgc27d905">
+   ID  ln_balance_limit  ...  age  default_next_month
+0   1          9.903488  ...   24                   1
+1   2         11.695247  ...   26                   1
+2   3         11.407565  ...   34                   0
+3   4         10.819778  ...   37                   0
+4   5         10.819778  ...   57                   0
+
+[5 rows x 7 columns]
+</pre>
+
+<p>
+Now we prepare the data.
+</p>
+
+<div class="src-name" id="org73a837e">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.model_selection </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> train_test_split</span>
+
+<span style="color: #9CDCFE;">x_cols</span> <span style="color: #e0e0e0;">=</span> [i <span style="color: #569CD6;">for</span> <span style="color: #9CDCFE;">i</span> <span style="color: #569CD6;">in</span> df.<span style="color: #9CDCFE;">columns</span> <span style="color: #569CD6;">if</span> i <span style="color: #569CD6;">not</span> <span style="color: #569CD6;">in</span> (<span style="color: #CE9178;">'ID'</span>, <span style="color: #CE9178;">'default_next_month'</span>)]
+<span style="color: #9CDCFE;">X</span> <span style="color: #e0e0e0;">=</span> df[x_cols]
+<span style="color: #9CDCFE;">y</span> <span style="color: #e0e0e0;">=</span> df[<span style="color: #CE9178;">'default_next_month'</span>]
+<span style="color: #9CDCFE;">X_train</span>, <span style="color: #9CDCFE;">X_test</span>, <span style="color: #9CDCFE;">y_train</span>, <span style="color: #9CDCFE;">y_test</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">train_test_split</span>(<span style="color: #e0e0e0;">X</span>, y, <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #4EC9B0;">X_train</span>.<span style="color: #9CDCFE;">shape</span>, <span style="color: #4EC9B0;">X_test</span>.<span style="color: #9CDCFE;">shape</span>)
+</pre>
+</div>
+
+<pre class="example" id="org8689e99">
+(22500, 5) (7500, 5)
+</pre>
+
+<p>
+We can use the <code>RandomUnderSampler</code> model.
+</p>
+
+<div class="src-name" id="org06d337a">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> imblearn.under_sampling </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">RandomUnderSampler</span>
+
+<span style="color: #9CDCFE;">ros</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">RandomUnderSampler</span>(<span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>)
+<span style="color: #9CDCFE;">X_resampled</span>, <span style="color: #9CDCFE;">y_resampled</span> <span style="color: #e0e0e0;">=</span> ros.<span style="color: #ded492;">fit_resample</span>(<span style="color: #4EC9B0;">X_train</span>, y_train)
+<span style="color: #C586C0;">print</span>(<span style="color: #4EC9B0;">Counter</span>(y_resampled))
+</pre>
+</div>
+
+<pre class="example" id="orgb2670d7">
+Counter({0: 4968, 1: 4968})
+</pre>
+
+<p>
+Then we can make predictions.
+</p>
+
+<div class="src-name" id="org41e90fd">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.linear_model </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">LogisticRegression</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> confusion_matrix</span>
+
+<span style="color: #9CDCFE;">model</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">LogisticRegression</span>(<span style="color: #9CDCFE;">solver</span><span style="color: #e0e0e0;">=</span><span style="color: #CE9178;">'lbfgs'</span>, <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>)
+model.<span style="color: #ded492;">fit</span>(<span style="color: #4EC9B0;">X_resampled</span>, y_resampled)
+<span style="color: #9CDCFE;">y_pred</span> <span style="color: #e0e0e0;">=</span> model.<span style="color: #ded492;">predict</span>(<span style="color: #4EC9B0;">X_test</span>)
+<span style="color: #9CDCFE;">cm</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">confusion_matrix</span>(y_test, y_pred)
+<span style="color: #C586C0;">print</span>(cm)
+</pre>
+</div>
+
+<pre class="example" id="org484c91e">
+[[3732 2100]
+ [ 740  928]]
+</pre>
+
+<p>
+And finally we print the report.
+</p>
+
+<div class="src-name" id="org98d4c79">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> balanced_accuracy_score</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> imblearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> classification_report_imbalanced</span>
+
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"accuracy:"</span>, <span style="color: #ded492;">balanced_accuracy_score</span>(y_test, y_pred))
+<span style="color: #C586C0;">print</span>(<span style="color: #ded492;">classification_report_imbalanced</span>(y_test, y_pred))
+</pre>
+</div>
+
+<pre class="example" id="orge539a52">
+accuracy: 0.5981363057701987
+                   pre       rec       spe        f1       geo       iba       sup
+
+          0       0.83      0.64      0.56      0.72      0.60      0.36      5832
+          1       0.31      0.56      0.64      0.40      0.60      0.35      1668
+
+avg / total       0.72      0.62      0.57      0.65      0.60      0.36      7500
+</pre>
+
+<p>
+The results are underwhelming.
+</p>
+</div>
+</div>
+
+<div id="outline-container-cluster-centroid-undersampling" class="outline-3">
+<h3 id="cluster-centroid-undersampling"><span class="section-number-3">12.2.</span> Cluster Centroid Undersampling</h3>
+<div class="outline-text-3" id="text-cluster-centroid-undersampling">
+<p>
+Similar to SMOTE, it generate synthetic data points, called centroids, that are representative of the clusters of other datapoints.
+</p>
+
+<p>
+However, this algorithm is computationally intensive and may take a while to complete.
+</p>
+
+<div class="src-name" id="org6cf5d56">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> imblearn.under_sampling </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">ClusterCentroids</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.linear_model </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">LogisticRegression</span>
+
+<span style="color: #9CDCFE;">cc</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">ClusterCentroids</span>(<span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>)
+<span style="color: #9CDCFE;">X_resampled</span>, <span style="color: #9CDCFE;">y_resampled</span> <span style="color: #e0e0e0;">=</span> cc.<span style="color: #ded492;">fit_resample</span>(<span style="color: #4EC9B0;">X_train</span>, y_train)
+<span style="color: #9CDCFE;">model</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">LogisticRegression</span>(<span style="color: #9CDCFE;">solver</span><span style="color: #e0e0e0;">=</span><span style="color: #CE9178;">'lbfgs'</span>, <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>)
+model.<span style="color: #ded492;">fit</span>(<span style="color: #4EC9B0;">X_resampled</span>, y_resampled)
+<span style="color: #C586C0;">print</span>(model)
+</pre>
+</div>
+
+<pre class="example" id="org44f0ae5">
+LogisticRegression(random_state=1)
+</pre>
+
+<p>
+Now we make a prediction.
+</p>
+
+<div class="src-name" id="org855ad82">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9CDCFE;">y_pred</span> <span style="color: #e0e0e0;">=</span> model.<span style="color: #ded492;">predict</span>(<span style="color: #4EC9B0;">X_test</span>)
+<span style="color: #C586C0;">print</span>(y_pred[:<span style="color: #BBCCAA;">10</span>])
+</pre>
+</div>
+
+<pre class="example" id="org0e9cfe1">
+[0 1 1 0 0 0 0 0 1 0]
+</pre>
+
+<p>
+And evaluate the model.
+</p>
+
+<div class="src-name" id="orgca38d30">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> confusion_matrix</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> balanced_accuracy_score</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> imblearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> classification_report_imbalanced</span>
+
+<span style="color: #9CDCFE;">cm</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">confusion_matrix</span>(y_test, y_pred)
+<span style="color: #9CDCFE;">score</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">balanced_accuracy_score</span>(y_test, y_pred)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"Confusion Matrix:"</span>, cm)
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"accuracy:"</span>, score)
+<span style="color: #C586C0;">print</span>(<span style="color: #ded492;">classification_report_imbalanced</span>(y_test, y_pred))
+</pre>
+</div>
+
+<pre class="example" id="orgd8f8efe">
+Confusion Matrix: [[2840 2992]
+ [ 612 1056]]
+accuracy: 0.5600309875556345
+                   pre       rec       spe        f1       geo       iba       sup
+
+          0       0.82      0.49      0.63      0.61      0.56      0.30      5832
+          1       0.26      0.63      0.49      0.37      0.56      0.31      1668
+
+avg / total       0.70      0.52      0.60      0.56      0.56      0.31      7500
+</pre>
+
+<p>
+The results are even worse so we need to look for another option.
+</p>
+</div>
+</div>
+
+<div id="outline-container-smoteenn" class="outline-3">
+<h3 id="smoteenn"><span class="section-number-3">12.3.</span> SMOTEENN</h3>
+<div class="outline-text-3" id="text-smoteenn">
+<p>
+SMOTEENN combines both SMOTE and ENN algorithms:
+</p>
+
+<ol class="org-ol">
+<li>Oversample th eminority class with SMOTE.</li>
+<li>Clean the resulting data with undersampling. If the two nearest neighbors of a data point belong to two different classes, that data point is dropped.</li>
+</ol>
+
+<p>
+So we are removing all synthetic datapoints that overlap between the two classes and are left with larger sample size than the original but not as much as the previous oversampling techniques. This gives us a more clean separation between classes.
+</p>
+
+<div class="src-name" id="org25c8425">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">import</span> <span style="color: #4EC9B0;">pandas </span><span style="color: #569CD6;">as</span><span style="color: #4EC9B0;"> pd</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> pathlib </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">Path</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> collections </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">Counter</span>
+
+<span style="color: #9CDCFE;">data</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">Path</span>(<span style="color: #CE9178;">'../resources/cc_default.csv'</span>)
+<span style="color: #9CDCFE;">df</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">pd</span>.<span style="color: #ded492;">read_csv</span>(data)
+<span style="color: #C586C0;">print</span>(df.<span style="color: #ded492;">head</span>())
+</pre>
+</div>
+
+<pre class="example" id="orge2b8bae">
+   ID  ln_balance_limit  ...  age  default_next_month
+0   1          9.903488  ...   24                   1
+1   2         11.695247  ...   26                   1
+2   3         11.407565  ...   34                   0
+3   4         10.819778  ...   37                   0
+4   5         10.819778  ...   57                   0
+
+[5 rows x 7 columns]
+</pre>
+
+<p>
+We will prepare the data first.
+</p>
+
+<div class="src-name" id="org6663099">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.model_selection </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> train_test_split</span>
+
+<span style="color: #9CDCFE;">x_cols</span> <span style="color: #e0e0e0;">=</span> [i <span style="color: #569CD6;">for</span> <span style="color: #9CDCFE;">i</span> <span style="color: #569CD6;">in</span> df.<span style="color: #9CDCFE;">columns</span> <span style="color: #569CD6;">if</span> i <span style="color: #569CD6;">not</span> <span style="color: #569CD6;">in</span> (<span style="color: #CE9178;">'ID'</span>, <span style="color: #CE9178;">'default_next_month'</span>)]
+<span style="color: #9CDCFE;">X</span> <span style="color: #e0e0e0;">=</span> df[x_cols]
+<span style="color: #9CDCFE;">y</span> <span style="color: #e0e0e0;">=</span> df[<span style="color: #CE9178;">'default_next_month'</span>]
+<span style="color: #9CDCFE;">X_train</span>, <span style="color: #9CDCFE;">X_test</span>, <span style="color: #9CDCFE;">y_train</span>, <span style="color: #9CDCFE;">y_test</span> <span style="color: #e0e0e0;">=</span> <span style="color: #ded492;">train_test_split</span>(<span style="color: #e0e0e0;">X</span>, y, <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>)
+<span style="color: #C586C0;">print</span>(<span style="color: #4EC9B0;">X_train</span>.<span style="color: #9CDCFE;">shape</span>, <span style="color: #4EC9B0;">X_test</span>.<span style="color: #9CDCFE;">shape</span>)
+</pre>
+</div>
+
+<pre class="example" id="orgf13dbe0">
+(22500, 5) (7500, 5)
+</pre>
+
+<p>
+Now we use SMOTEEN for resampling.
+</p>
+
+<div class="src-name" id="org2c20abb">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> imblearn.combine </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #e0e0e0;">SMOTEENN</span>
+
+<span style="color: #9CDCFE;">smote_enn</span> <span style="color: #e0e0e0;">=</span> <span style="color: #e0e0e0;">SMOTEENN</span>(<span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">0</span>)
+<span style="color: #9CDCFE;">X_resampled</span>, <span style="color: #9CDCFE;">y_resampled</span> <span style="color: #e0e0e0;">=</span> smote_enn.<span style="color: #ded492;">fit_resample</span>(<span style="color: #e0e0e0;">X</span>, y)
+<span style="color: #C586C0;">print</span>(<span style="color: #4EC9B0;">X_resampled</span>.<span style="color: #9CDCFE;">shape</span>, y_resampled.<span style="color: #9CDCFE;">shape</span>)
+</pre>
+</div>
+
+<pre class="example" id="orgc0aa0d2">
+(16441, 5) (16441,)
+</pre>
+
+<p>
+Then we make predictions.
+</p>
+
+<div class="src-name" id="org9cb40e0">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.linear_model </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> </span><span style="color: #4EC9B0;">LogisticRegression</span>
+
+<span style="color: #9CDCFE;">model</span> <span style="color: #e0e0e0;">=</span> <span style="color: #4EC9B0;">LogisticRegression</span>(<span style="color: #9CDCFE;">solver</span><span style="color: #e0e0e0;">=</span><span style="color: #CE9178;">'lbfgs'</span>, <span style="color: #9CDCFE;">random_state</span><span style="color: #e0e0e0;">=</span><span style="color: #BBCCAA;">1</span>)
+model.<span style="color: #ded492;">fit</span>(<span style="color: #4EC9B0;">X_resampled</span>, y_resampled)
+<span style="color: #9CDCFE;">y_pred</span> <span style="color: #e0e0e0;">=</span> model.<span style="color: #ded492;">predict</span>(<span style="color: #4EC9B0;">X_test</span>)
+<span style="color: #C586C0;">print</span>(y_pred[:<span style="color: #BBCCAA;">10</span>])
+</pre>
+</div>
+
+<pre class="example" id="orgf078108">
+[0 1 1 0 0 0 0 0 0 0]
+</pre>
+
+<p>
+And we evaluate the model.
+</p>
+
+<div class="src-name" id="orgf27c425">
+<p>
+
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> confusion_matrix</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> sklearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> balanced_accuracy_score</span>
+<span style="color: #569CD6;">from</span><span style="color: #4EC9B0;"> imblearn.metrics </span><span style="color: #569CD6;">import</span><span style="color: #4EC9B0;"> classification_report_imbalanced</span>
+
+<span style="color: #C586C0;">print</span>(<span style="color: #CE9178;">"score:"</span>, <span style="color: #ded492;">balanced_accuracy_score</span>(y_test, y_pred))
+<span style="color: #C586C0;">print</span>(<span style="color: #ded492;">confusion_matrix</span>(y_test, y_pred))
+<span style="color: #C586C0;">print</span>(<span style="color: #ded492;">classification_report_imbalanced</span>(y_test, y_pred))
+</pre>
+</div>
+
+<pre class="example" id="orgcdc6853">
+score: 0.5671074251709743
+[[4905  927]
+ [1179  489]]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          0       0.81      0.84      0.29      0.82      0.50      0.26      5832
+          1       0.35      0.29      0.84      0.32      0.50      0.23      1668
+
+avg / total       0.70      0.72      0.42      0.71      0.50      0.25      7500
+</pre>
+
+<p>
+The results are better than with undersampling although they are still not great.
+</p>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://en.wikipedia.org/wiki/Sigmoid_function">https://en.wikipedia.org/wiki/Sigmoid_function</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://en.wikipedia.org/wiki/Logit">https://en.wikipedia.org/wiki/Logit</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html">https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5" role="doc-backlink">5</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6" role="doc-backlink">6</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_recall_fscore_support.html">https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_recall_fscore_support.html</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.7" class="footnum" href="#fnr.7" role="doc-backlink">7</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="author">Author: Alberto Valdez</p>
+<p class="date">Created: 2022-10-27 Thu 17:17</p>
+</div>
+</body>
+</html>

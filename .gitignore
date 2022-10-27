@@ -254,4 +254,5 @@ resources/secrets
 .python-version
 # **/*.[jpJP][npNP][egEG]*
 **/*.[jpJP][npNP]*[gG$]
+**/*.csv
 !docs/build
